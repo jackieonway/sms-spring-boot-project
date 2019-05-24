@@ -1,0 +1,7 @@
+spring:
+  pengzu:
+    sms:
+      sms-type: tentcent
+      security-key: your security-key
+      appid: your appid
+      sign: your sign
