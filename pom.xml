@@ -26,8 +26,18 @@
     <modules>
         <module>sms-spring-boot-autoconfigure</module>
         <module>sms-spring-boot-starter</module>
-        <module>demo-sms</module>
+        <!--<module>demo-sms</module>-->
     </modules>
+	<distributionManagement>
+		<repository>
+			<id>mvnRepoCenter</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+		<snapshotRepository>
+			<id>mvnRepoCenter</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
     <build>
         <plugins>
             <plugin>
