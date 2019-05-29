@@ -19,7 +19,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.pengzu.sms</groupId>
+            <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-spring-boot-autoconfigure</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
