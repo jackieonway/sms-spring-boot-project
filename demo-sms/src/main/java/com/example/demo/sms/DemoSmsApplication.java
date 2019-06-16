@@ -1,12 +1,10 @@
 package com.example.demo.sms;
 
-import com.pengzu.sms.annotion.EnabledPengzuSmsAutoConfiguration;
+import com.github.jackieonway.sms.annotion.EnabledSmsAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
-@EnabledPengzuSmsAutoConfiguration
-@ComponentScan(basePackages = {"com.example.demo.sms","com.pengzu.sms"})
+@EnabledSmsAutoConfiguration
 @SpringBootApplication
 public class DemoSmsApplication {
 

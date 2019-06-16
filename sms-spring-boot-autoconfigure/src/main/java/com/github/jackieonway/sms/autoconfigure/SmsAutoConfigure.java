@@ -1,16 +1,16 @@
-package com.pengzu.sms.autoconfigure;
+package com.github.jackieonway.sms.autoconfigure;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsSingleSender;
-import com.pengzu.sms.annotion.EnabledPengzuSmsAutoConfiguration;
-import com.pengzu.sms.entity.SmsProperties;
-import com.pengzu.sms.entity.SmsType;
-import com.pengzu.sms.service.AliSmsService;
-import com.pengzu.sms.service.PengzuSmsService;
-import com.pengzu.sms.service.TencentSmsService;
+import com.github.jackieonway.sms.annotion.EnabledSmsAutoConfiguration;
+import com.github.jackieonway.sms.entity.SmsProperties;
+import com.github.jackieonway.sms.entity.SmsType;
+import com.github.jackieonway.sms.service.AliSmsService;
+import com.github.jackieonway.sms.service.SmsService;
+import com.github.jackieonway.sms.service.TencentSmsService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,13 +23,13 @@ import org.springframework.context.annotation.Configuration;
  * @version \$id: PengzuSmsAutoConfigure.java v 0.1 2019-05-11 10:03 Jackie Exp $$
  */
 @Configuration
-@ConditionalOnBean(annotation = EnabledPengzuSmsAutoConfiguration.class)
+@ConditionalOnBean(annotation = EnabledSmsAutoConfiguration.class)
 @EnableConfigurationProperties(SmsProperties.class)
-public class PengzuSmsAutoConfigure {
+public class SmsAutoConfigure {
 
     private SmsProperties smsProperties;
     private ApplicationContext applicationContext;
-    public PengzuSmsAutoConfigure(SmsProperties smsProperties, ApplicationContext applicationContext) {
+    public SmsAutoConfigure(SmsProperties smsProperties, ApplicationContext applicationContext) {
         this.smsProperties = smsProperties;
         this.applicationContext = applicationContext;
     }
@@ -68,11 +68,11 @@ public class PengzuSmsAutoConfigure {
     }
 
     @Bean
-    public PengzuSmsService pengzuSmsService(){
-        return getPengzuSmsService();
+    public SmsService smsService(){
+        return getSmsService();
     }
 
-    private PengzuSmsService getPengzuSmsService(){
+    private SmsService getSmsService(){
         if(SmsType.ALI.equals(smsProperties.getSmsType())){
             return new AliSmsService(
                     applicationContext.getBean(IAcsClient.class),

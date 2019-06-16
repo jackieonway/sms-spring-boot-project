@@ -1,5 +1,5 @@
 spring:
-  pengzu:
+  jackieonway:
     sms:
       sms-type: tentcent
       security-key: your security-key

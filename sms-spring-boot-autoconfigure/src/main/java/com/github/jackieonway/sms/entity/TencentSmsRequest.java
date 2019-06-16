@@ -1,4 +1,4 @@
-package com.pengzu.sms.entity;
+package com.github.jackieonway.sms.entity;
 
 import java.util.Arrays;
 

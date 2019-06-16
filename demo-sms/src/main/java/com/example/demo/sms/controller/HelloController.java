@@ -1,14 +1,10 @@
 package com.example.demo.sms.controller;
 
-import com.aliyuncs.exceptions.ClientException;
-import com.github.qcloudsms.httpclient.HTTPException;
-import com.pengzu.sms.entity.TencentSmsRequest;
-import com.pengzu.sms.service.PengzuSmsService;
+import com.github.jackieonway.sms.entity.TencentSmsRequest;
+import com.github.jackieonway.sms.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
 
 /**
  * @author Jackie
@@ -21,15 +17,15 @@ import java.io.IOException;
 public class HelloController {
 
     @Autowired
-    private PengzuSmsService pengzuSmsService;
+    private SmsService smsService;
 
     @GetMapping("/sayHello")
-    public Object sayHello() throws ClientException, HTTPException, IOException {
+    public Object sayHello() {
         // your template params
         String[] paramst = {"5678","5"};
         TencentSmsRequest tencentSmsRequest = new TencentSmsRequest();
         tencentSmsRequest.setPhoneNumber(new String[]{"your cellphone"});
         tencentSmsRequest.setParams(paramst);
-        return pengzuSmsService.sendTemplateSms("328921", tencentSmsRequest);
+        return smsService.sendTemplateSms("328921", tencentSmsRequest);
     }
 }

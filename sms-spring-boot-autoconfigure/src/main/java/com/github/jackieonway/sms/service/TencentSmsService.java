@@ -1,10 +1,11 @@
-package com.pengzu.sms.service;
+package com.github.jackieonway.sms.service;
 
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.httpclient.HTTPException;
-import com.pengzu.sms.entity.SmsProperties;
-import com.pengzu.sms.entity.TencentSmsRequest;
+import com.github.jackieonway.sms.entity.SmsProperties;
+import com.github.jackieonway.sms.entity.TencentSmsRequest;
+import com.github.jackieonway.sms.exception.SmsException;
 
 import java.io.IOException;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
  * @author Jackie
  * @version \$id: TencentSmsService.java v 0.1 2019-05-17 21:47 Jackie Exp $$
  */
-public class TencentSmsService implements PengzuSmsService {
+public class TencentSmsService implements SmsService {
 
     private static final String SYS_TYPE_CONFIG_ERROR_MSG = "短信服务商信息配置错误";
 
@@ -30,7 +31,7 @@ public class TencentSmsService implements PengzuSmsService {
     }
 
     @Override
-    public Object sendSms(Integer type, Object params) throws HTTPException, IOException {
+    public Object sendSms(Integer type, Object params) throws SmsException {
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -38,14 +39,20 @@ public class TencentSmsService implements PengzuSmsService {
             String extend = tencentSmsRequest.getExtend();
             String ext = tencentSmsRequest.getExt();
             String msg = tencentSmsRequest.getMsg();
-            return smsSingleSender.send(type,nationCode, phoneNumber,
-                    msg, extend, ext);
+            try {
+                return smsSingleSender.send(type,nationCode, phoneNumber,
+                        msg, extend, ext);
+            } catch (HTTPException e) {
+                throw new SmsException(e);
+            } catch (IOException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
     @Override
-    public Object sendTemplateSms(String tempalteId, Object params) throws HTTPException, IOException {
+    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException{
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -54,14 +61,20 @@ public class TencentSmsService implements PengzuSmsService {
             String sign = smsProperties.getSign();
             String extend = tencentSmsRequest.getExtend();
             String ext = tencentSmsRequest.getExt();
-            return smsSingleSender.sendWithParam(nationCode, phoneNumber, Integer.parseInt(tempalteId),
-                    params1, sign, extend, ext);
+            try {
+                return smsSingleSender.sendWithParam(nationCode, phoneNumber, Integer.parseInt(tempalteId),
+                        params1, sign, extend, ext);
+            } catch (HTTPException e) {
+                throw new SmsException(e);
+            } catch (IOException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
     @Override
-    public Object sendBatchSms(int type, Object params) throws HTTPException, IOException {
+    public Object sendBatchSms(int type, Object params) throws SmsException{
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -69,13 +82,19 @@ public class TencentSmsService implements PengzuSmsService {
             String msg = tencentSmsRequest.getMsg();
             String extend = tencentSmsRequest.getExtend();
             String ext = tencentSmsRequest.getExt();
-            return smsMultiSender.send(type,nationCode, phoneNumber, msg, extend, ext);
+            try {
+                return smsMultiSender.send(type,nationCode, phoneNumber, msg, extend, ext);
+            } catch (HTTPException e) {
+                throw new SmsException(e);
+            } catch (IOException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
     @Override
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws HTTPException, IOException {
+    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException {
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -85,8 +104,14 @@ public class TencentSmsService implements PengzuSmsService {
             String sign = smsProperties.getSign();
             String extend = tencentSmsRequest.getExtend();
             String ext = tencentSmsRequest.getExt();
-            return smsMultiSender.sendWithParam(nationCode, phoneNumber, templateId,
-                    params1, sign, extend, ext);
+            try {
+                return smsMultiSender.sendWithParam(nationCode, phoneNumber, templateId,
+                        params1, sign, extend, ext);
+            } catch (HTTPException e) {
+                throw new SmsException(e);
+            } catch (IOException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }

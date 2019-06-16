@@ -1,4 +1,4 @@
-package com.pengzu.sms.entity;
+package com.github.jackieonway.sms.entity;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Jackie
  * @version \$id: SmsProperties.java v 0.1 2019-05-11 10:03 Jackie Exp $$
  */
-@ConfigurationProperties(prefix = "spring.pengzu.sms")
+@ConfigurationProperties(prefix = "spring.jackieonway.sms")
 public class SmsProperties {
 
     private SmsType smsType = SmsType.ALI;

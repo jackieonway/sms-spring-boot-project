@@ -1,18 +1,19 @@
-package com.pengzu.sms.service;
+package com.github.jackieonway.sms.service;
 
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
-import com.pengzu.sms.entity.AliSmsRequest;
-import com.pengzu.sms.entity.SmsProperties;
+import com.github.jackieonway.sms.entity.AliSmsRequest;
+import com.github.jackieonway.sms.entity.SmsProperties;
+import com.github.jackieonway.sms.exception.SmsException;
 import org.springframework.util.StringUtils;
 
 /**
  * @author Jackie
  * @version \$id: AliSmsService.java v 0.1 2019-05-17 21:46 Jackie Exp $$
  */
-public class AliSmsService implements PengzuSmsService {
+public class AliSmsService implements SmsService {
 
     private static final String DYSMSAPI_ALIYUNCS_COM = "dysmsapi.aliyuncs.com";
     private static final String SYS_VERSION = "2017-05-25";
@@ -28,33 +29,41 @@ public class AliSmsService implements PengzuSmsService {
     }
 
     @Override
-    public Object sendSms(Integer type, Object params) throws ClientException {
+    public Object sendSms(Integer type, Object params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setSingleSmsParams(request, aliSmsRequest,aliSmsRequest.getTemplateCode());
             setOtherParams(request, aliSmsRequest);
-            return iAcsClient.getCommonResponse(request);
+            try {
+                return iAcsClient.getCommonResponse(request);
+            } catch (ClientException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
     @Override
-    public Object sendTemplateSms(String tempalteId, Object params) throws ClientException{
+    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException{
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setSingleSmsParams(request,aliSmsRequest,tempalteId);
             setOtherParams(request, aliSmsRequest);
-            return iAcsClient.getCommonResponse(request);
+            try {
+                return iAcsClient.getCommonResponse(request);
+            } catch (ClientException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
     @Override
-    public Object sendBatchSms(int type, Object params) throws ClientException {
+    public Object sendBatchSms(int type, Object params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
@@ -62,21 +71,29 @@ public class AliSmsService implements PengzuSmsService {
             String templateCode = aliSmsRequest.getTemplateCode();
             setMultiSmsParams(request, aliSmsRequest, templateCode);
             setOtherParams(request, aliSmsRequest);
-            return iAcsClient.getCommonResponse(request);
+            try {
+                return iAcsClient.getCommonResponse(request);
+            } catch (ClientException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
 
     @Override
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws ClientException {
+    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setMultiSmsParams(request,aliSmsRequest,tempalteId);
             setOtherParams(request, aliSmsRequest);
-            return iAcsClient.getCommonResponse(request);
+            try {
+                return iAcsClient.getCommonResponse(request);
+            } catch (ClientException e) {
+                throw new SmsException(e);
+            }
         }
         throw new IllegalStateException(SYS_TYPE_CONFIG_ERROR_MSG);
     }
