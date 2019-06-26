@@ -60,8 +60,8 @@ spring:
       @Autowired
       private SmsService tencentSmsService;
       注入，方式与方法2类似
- 采用方式1，最终的jar包将会比方式2和方法3小，但是只能存在一种短信方式，不适
- 合使用多个短信运营商的项目
+ 采用方式1，最终的jar包将会比方式2和方法3小，但是最终只有一种短信模式
+生效，即只能使用一个短信运营商的服务，方式2，3能快速切换短信运营商
 
 ```
 @RestController
@@ -75,8 +75,8 @@ public class HelloController {
      *      @Autowired
      *      private SmsService tencentSmsService;
      *      注入，方式与方法2类似
-     * 采用方式1，最终的jar包将会比方式2和方法3小，但是只能存在一种短信方式，不适
-     * 合使用多个短信运营商的项目
+     * 采用方式1，最终的jar包将会比方式2和方法3小，但是最终只有一种短信模式
+     * 生效，即只能使用一个短信运营商的服务，方式2，3能快速切换短信运营商
      */
 
     @Autowired
