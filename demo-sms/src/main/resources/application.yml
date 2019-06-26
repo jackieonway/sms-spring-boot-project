@@ -1,7 +1,7 @@
 spring:
   jackieonway:
     sms:
-#      sms-type: tentcent #可以不填，默认是ali
+      sms-type: tentcent #可以不填，默认是ali
       security-key: your security-key
       appid: your appid
       sign: your sign

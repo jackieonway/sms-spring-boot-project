@@ -32,8 +32,8 @@ public class HelloController {
     @Autowired
     private SmsService tencentSmsService;
 
-    @Autowired
-    private SmsService aliSmsService;
+//    @Autowired
+//    private SmsService aliSmsService;
 
     @GetMapping("/tencent")
     public Object tencent() {
@@ -46,7 +46,7 @@ public class HelloController {
         return tencentSmsService.sendTemplateSms("328921", tencentSmsRequest);
     }
 
-    @GetMapping("/ali")
+   /* @GetMapping("/ali")
     public Object ali() {
         // 具体配置请参照具体运营商
         AliSmsRequest aliSmsRequest = new AliSmsRequest();
@@ -55,5 +55,5 @@ public class HelloController {
         aliSmsRequest.setTemplateParam("{\"code\":\"asdsads\"}");
         aliSmsRequest.setSignName("123");
         return aliSmsService.sendTemplateSms("328921",aliSmsRequest);
-    }
+    }*/
 }
