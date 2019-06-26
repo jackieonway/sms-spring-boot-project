@@ -1,6 +1,7 @@
 package com.github.jackieonway.sms.entity;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author Jackie
@@ -9,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "spring.jackieonway.sms")
 public class SmsProperties {
 
+    @NestedConfigurationProperty
     private SmsType smsType = SmsType.ALI;
 
     /**

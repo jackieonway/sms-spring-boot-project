@@ -27,6 +27,16 @@
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-spring-boot-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <!--<exclusions>
+                <exclusion>
+                    <groupId>com.aliyun</groupId>
+                    <artifactId>aliyun-java-sdk-core</artifactId>
+                </exclusion>
+               &lt;!&ndash; <exclusion>
+                    <groupId>com.github.qcloudsms</groupId>
+                    <artifactId>qcloudsms</artifactId>
+                </exclusion>&ndash;&gt;
+            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
