@@ -14,7 +14,7 @@ public enum SmsType {
     /**
      * 腾讯短信服务
      */
-    TENTCENT("tengcent","腾讯短信服务");
+    TENCENT("tencent","腾讯短信服务");
 
     private String type;
 

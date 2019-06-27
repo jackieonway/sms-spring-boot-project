@@ -32,7 +32,7 @@ public class SmsAutoConfigure {
 
         @Bean
         public SmsService tencentSmsService(SmsProperties smsProperties){
-            if(SmsType.TENTCENT.equals(smsProperties.getSmsType())){
+            if(SmsType.TENCENT.equals(smsProperties.getSmsType())){
                 return new TencentSmsService(
                         new SmsSingleSender(
                                 Integer.parseInt(smsProperties.getAppid()),
@@ -49,6 +49,7 @@ public class SmsAutoConfigure {
     @Configuration
     @ConditionalOnClass({IAcsClient.class})
     public static class AliSmsServiceConfiguration {
+
         @Bean
         public SmsService aliSmsService(SmsProperties smsProperties){
             if (SmsType.ALI.equals(smsProperties.getSmsType())){
