@@ -18,10 +18,10 @@ public interface SmsService {
 
     /**
      * 单个发送模板短信
-     * @param tempalteId 短信模板id
+     * @param templateId 短信模板id
      * @param params 根据对应的短信服务商所需信息填写
      */
-    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException;
+    public Object sendTemplateSms(String templateId, Object params) throws SmsException;
 
     /**
      *  批量发送短信
@@ -31,8 +31,8 @@ public interface SmsService {
 
     /**
      * 批量发送模板短信
-     * @param tempalteId 短信模板id
+     * @param templateId 短信模板id
      * @param params 根据对应的短信服务商所需信息填写
      */
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException;
+    public Object sendBatchTemplateSms(String templateId, Object params) throws SmsException;
 }

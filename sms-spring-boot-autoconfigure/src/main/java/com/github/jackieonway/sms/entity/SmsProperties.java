@@ -38,6 +38,11 @@ public class SmsProperties {
      */
     private String sign;
 
+    /**
+     *  云之讯服务地址
+     */
+    private String restSserver;
+
     public SmsType getSmsType() {
         return smsType;
     }
@@ -86,22 +91,25 @@ public class SmsProperties {
         this.sign = sign;
     }
 
+    public String getRestSserver() {
+        return restSserver;
+    }
+
+    public void setRestSserver(String restSserver) {
+        this.restSserver = restSserver;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"smsType\":")
-                .append(smsType);
-        sb.append(",\"appid\":\"")
-                .append(appid).append('\"');
-        sb.append(",\"accessKey\":\"")
-                .append(accessKey).append('\"');
-        sb.append(",\"securityKey\":\"")
-                .append(securityKey).append('\"');
-        sb.append(",\"regionId\":\"")
-                .append(regionId).append('\"');
-        sb.append(",\"sign\":\"")
-                .append(sign).append('\"');
-        sb.append('}');
+        sb.append("\"smsType\":").append(smsType);
+        sb.append(",\"appid\":\"").append(appid).append('\"');
+        sb.append(",\"accessKey\":\"").append(accessKey).append('\"');
+        sb.append(",\"securityKey\":\"").append(securityKey).append('\"');
+        sb.append(",\"regionId\":\"").append(regionId).append('\"');
+        sb.append(",\"sign\":\"").append(sign).append('\"');
+        sb.append(",\"restSserver\":\"").append(restSserver).append('\"');
+        sb.append("}");
         return sb.toString();
     }
 }
