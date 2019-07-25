@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.service;
 
+import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.UcpassSmsRequest;
 import com.github.jackieonway.sms.exception.SmsException;
@@ -24,12 +25,12 @@ public class UcpassSmsService implements SmsService{
 
     @Deprecated
     @Override
-    public Object sendSms(Integer type, Object params) throws SmsException {
+    public Object sendSms(Integer type, BaseRequest params) throws SmsException {
        return sendTemplateSms(String.valueOf(type), params);
     }
 
     @Override
-    public Object sendTemplateSms(String templateId, Object params) throws SmsException {
+    public Object sendTemplateSms(String templateId, BaseRequest params) throws SmsException {
         if (params instanceof UcpassSmsRequest){
             UcpassSmsRequest ucPassSmsRequest = (UcpassSmsRequest) params;
             // 发送的手机号
@@ -46,12 +47,12 @@ public class UcpassSmsService implements SmsService{
 
     @Deprecated
     @Override
-    public Object sendBatchSms(int type, Object params) throws SmsException {
+    public Object sendBatchSms(int type, BaseRequest params) throws SmsException {
         return sendBatchTemplateSms(String.valueOf(type), params);
     }
 
     @Override
-    public Object sendBatchTemplateSms(String templateId, Object params) throws SmsException {
+    public Object sendBatchTemplateSms(String templateId, BaseRequest params) throws SmsException {
         if (params instanceof UcpassSmsRequest){
             UcpassSmsRequest ucPassSmsRequest = (UcpassSmsRequest) params;
             // 发送的手机号

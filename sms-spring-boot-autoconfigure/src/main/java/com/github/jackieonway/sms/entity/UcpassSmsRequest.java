@@ -5,7 +5,7 @@ package com.github.jackieonway.sms.entity;
  * @Date: 2019/7/15 14:27
  * @Description: 云之讯短信平台接口参数
  **/
-public class UcpassSmsRequest {
+public class UcpassSmsRequest extends BaseRequest {
 
     /**
      *模板中的替换参数，如该模板不存在参数则无需传该参数或者参数为空，

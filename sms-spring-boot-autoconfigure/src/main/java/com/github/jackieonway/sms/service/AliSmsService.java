@@ -5,6 +5,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.github.jackieonway.sms.entity.AliSmsRequest;
+import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.exception.SmsException;
 import org.springframework.util.StringUtils;
@@ -29,7 +30,7 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendSms(Integer type, Object params) throws SmsException {
+    public Object sendSms(Integer type, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
@@ -46,7 +47,7 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException{
+    public Object sendTemplateSms(String tempalteId, BaseRequest params) throws SmsException{
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
@@ -63,7 +64,7 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchSms(int type, Object params) throws SmsException {
+    public Object sendBatchSms(int type, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
@@ -82,7 +83,7 @@ public class AliSmsService implements SmsService {
 
 
     @Override
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException {
+    public Object sendBatchTemplateSms(String tempalteId, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {

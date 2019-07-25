@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.service;
 
+import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.httpclient.HTTPException;
@@ -31,7 +32,7 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendSms(Integer type, Object params) throws SmsException {
+    public Object sendSms(Integer type, BaseRequest params) throws SmsException {
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -52,7 +53,7 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException{
+    public Object sendTemplateSms(String tempalteId, BaseRequest params) throws SmsException{
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -74,7 +75,7 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchSms(int type, Object params) throws SmsException{
+    public Object sendBatchSms(int type, BaseRequest params) throws SmsException{
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
@@ -94,7 +95,7 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException {
+    public Object sendBatchTemplateSms(String tempalteId, BaseRequest params) throws SmsException {
         if (params instanceof TencentSmsRequest){
             TencentSmsRequest tencentSmsRequest = (TencentSmsRequest) params;
             String nationCode = tencentSmsRequest.getNationCode();
