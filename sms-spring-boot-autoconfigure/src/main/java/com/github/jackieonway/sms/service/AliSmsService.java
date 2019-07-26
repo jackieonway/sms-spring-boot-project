@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.service;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
@@ -116,11 +117,7 @@ public class AliSmsService implements SmsService {
         if (phoneNumbers == null){
             throw new IllegalArgumentException("param phoneNumbers can not be null");
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String phoneNumber : phoneNumbers) {
-            stringBuilder.append(phoneNumber).append(",");
-        }
-        request.putQueryParameter("PhoneNumbers",stringBuilder.substring(0,stringBuilder.length()-1));
+        request.putQueryParameter("PhoneNumbers", JSON.toJSONString(phoneNumbers));
     }
 
     private void setSingleSmsParams(CommonRequest request, AliSmsRequest aliSmsRequest,String templateCode) {
