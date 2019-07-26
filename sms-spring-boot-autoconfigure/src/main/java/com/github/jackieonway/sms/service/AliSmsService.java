@@ -67,7 +67,6 @@ public class AliSmsService implements SmsService {
     @Override
     public Object sendBatchSms(int type, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
-        request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             String templateCode = aliSmsRequest.getTemplateCode();
@@ -86,7 +85,6 @@ public class AliSmsService implements SmsService {
     @Override
     public Object sendBatchTemplateSms(String tempalteId, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
-        request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setMultiSmsParams(request,aliSmsRequest,tempalteId);
@@ -117,7 +115,17 @@ public class AliSmsService implements SmsService {
         if (phoneNumbers == null){
             throw new IllegalArgumentException("param phoneNumbers can not be null");
         }
-        request.putQueryParameter("PhoneNumbers", JSON.toJSONString(phoneNumbers));
+        if (aliSmsRequest.getIsSendBatchSms()) {
+            request.setSysAction("SendBatchSms");
+			request.putQueryParameter("PhoneNumbers", JSON.toJSONString(phoneNumbers));
+		}else {
+            request.setSysAction("SendSms");
+			StringBuilder stringBuilder = new StringBuilder();
+			for (String phoneNumber : phoneNumbers) {
+				stringBuilder.append(phoneNumber).append(",");
+			}
+			request.putQueryParameter("PhoneNumbers", stringBuilder.substring(0, stringBuilder.length() - 1));
+		}
     }
 
     private void setSingleSmsParams(CommonRequest request, AliSmsRequest aliSmsRequest,String templateCode) {

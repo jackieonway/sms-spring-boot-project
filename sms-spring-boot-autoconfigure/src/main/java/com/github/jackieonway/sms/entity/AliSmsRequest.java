@@ -17,6 +17,8 @@ public class AliSmsRequest extends BaseRequest {
 
     private String outId;
 
+    private boolean isSendBatchSms = false;
+
     public String[] getPhoneNumbers() {
         return phoneNumbers;
     }
@@ -63,5 +65,13 @@ public class AliSmsRequest extends BaseRequest {
 
     public void setOutId(String outId) {
         this.outId = outId;
+    }
+
+    public boolean getIsSendBatchSms() {
+        return isSendBatchSms;
+    }
+
+    public void setIsSendBatchSms(boolean isSendBatchSms) {
+        this.isSendBatchSms = isSendBatchSms;
     }
 }
