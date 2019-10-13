@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @author Jackie
  * @version \$id: TencentSmsRequest.java v 0.1 2019-05-11 16:15 Jackie Exp $$
  */
-public class TencentSmsRequest {
+public class TencentSmsRequest extends BaseRequest {
 
     private String nationCode = "86";
 

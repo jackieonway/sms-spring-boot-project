@@ -4,7 +4,7 @@ package com.github.jackieonway.sms.entity;
  * @author Jackie
  * @version \$id: AliSmsRequest.java v 0.1 2019-05-17 21:19 Jackie Exp $$
  */
-public class AliSmsRequest {
+public class AliSmsRequest extends BaseRequest {
     private String[] phoneNumbers;
 
     private String signName;
@@ -16,6 +16,8 @@ public class AliSmsRequest {
     private String smsUpExtendCode;
 
     private String outId;
+
+    private boolean isSendBatchSms = false;
 
     public String[] getPhoneNumbers() {
         return phoneNumbers;
@@ -63,5 +65,13 @@ public class AliSmsRequest {
 
     public void setOutId(String outId) {
         this.outId = outId;
+    }
+
+    public boolean getIsSendBatchSms() {
+        return isSendBatchSms;
+    }
+
+    public void setIsSendBatchSms(boolean isSendBatchSms) {
+        this.isSendBatchSms = isSendBatchSms;
     }
 }

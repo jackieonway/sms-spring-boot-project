@@ -1,5 +1,11 @@
 package com.github.jackieonway.sms.autoconfigure;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
@@ -9,13 +15,10 @@ import com.github.jackieonway.sms.entity.SmsType;
 import com.github.jackieonway.sms.service.AliSmsService;
 import com.github.jackieonway.sms.service.SmsService;
 import com.github.jackieonway.sms.service.TencentSmsService;
+import com.github.jackieonway.sms.service.UcpassSmsService;
+import com.github.jackieonway.sms.ucpass.client.JsonReqClient;
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsSingleSender;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Jackie
@@ -58,6 +61,21 @@ public class SmsAutoConfigure {
                 return new AliSmsService(
                         new DefaultAcsClient(defaultProfile),
                         smsProperties);
+            }
+            return null;
+        }
+    }
+
+    @Configuration
+    @ConditionalOnClass({JsonReqClient.class})
+    public static class UCPassSmsServiceConfiguration{
+
+        @Bean
+        public SmsService ucpassSmsService(SmsProperties smsProperties){
+            if (SmsType.UCPASS.equals(smsProperties.getSmsType())){
+                return new UcpassSmsService(
+                    new JsonReqClient(smsProperties),
+                    smsProperties);
             }
             return null;
         }

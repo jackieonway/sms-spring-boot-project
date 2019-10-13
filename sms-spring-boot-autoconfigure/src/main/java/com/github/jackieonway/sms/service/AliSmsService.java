@@ -1,10 +1,12 @@
 package com.github.jackieonway.sms.service;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.github.jackieonway.sms.entity.AliSmsRequest;
+import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.exception.SmsException;
 import org.springframework.util.StringUtils;
@@ -29,7 +31,7 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendSms(Integer type, Object params) throws SmsException {
+    public Object sendSms(Integer type, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
@@ -46,7 +48,7 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException{
+    public Object sendTemplateSms(String tempalteId, BaseRequest params) throws SmsException{
         CommonRequest request = setCommonRequest();
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
@@ -63,9 +65,8 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchSms(int type, Object params) throws SmsException {
+    public Object sendBatchSms(int type, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
-        request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             String templateCode = aliSmsRequest.getTemplateCode();
@@ -82,9 +83,8 @@ public class AliSmsService implements SmsService {
 
 
     @Override
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException {
+    public Object sendBatchTemplateSms(String tempalteId, BaseRequest params) throws SmsException {
         CommonRequest request = setCommonRequest();
-        request.setSysAction("SendBatchSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setMultiSmsParams(request,aliSmsRequest,tempalteId);
@@ -115,11 +115,17 @@ public class AliSmsService implements SmsService {
         if (phoneNumbers == null){
             throw new IllegalArgumentException("param phoneNumbers can not be null");
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String phoneNumber : phoneNumbers) {
-            stringBuilder.append(phoneNumber).append(",");
-        }
-        request.putQueryParameter("PhoneNumbers",stringBuilder.substring(0,stringBuilder.length()-1));
+        if (aliSmsRequest.getIsSendBatchSms()) {
+            request.setSysAction("SendBatchSms");
+			request.putQueryParameter("PhoneNumbers", JSON.toJSONString(phoneNumbers));
+		}else {
+            request.setSysAction("SendSms");
+			StringBuilder stringBuilder = new StringBuilder();
+			for (String phoneNumber : phoneNumbers) {
+				stringBuilder.append(phoneNumber).append(",");
+			}
+			request.putQueryParameter("PhoneNumbers", stringBuilder.substring(0, stringBuilder.length() - 1));
+		}
     }
 
     private void setSingleSmsParams(CommonRequest request, AliSmsRequest aliSmsRequest,String templateCode) {
