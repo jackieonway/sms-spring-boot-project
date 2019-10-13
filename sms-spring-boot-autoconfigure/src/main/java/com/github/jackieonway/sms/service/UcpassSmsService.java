@@ -9,8 +9,8 @@ import com.github.jackieonway.sms.ucpass.client.JsonReqClient;
 /**
  * 云之讯短信服务
  * @author bigbearLoveTingting
- * @date 2019/7/15 14:01
- **/
+ * @version \$id: UcpassSmsService.java v 0.1 2019-7-15 14:01 bigbearLoveTingting Exp $$
+ */
 public class UcpassSmsService implements SmsService{
     private static final String SYS_TYPE_CONFIG_ERROR_MSG = "短信服务商信息配置错误";
 
