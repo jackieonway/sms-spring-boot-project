@@ -18,31 +18,15 @@ JDK 1.8
       <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-spring-boot-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
    ```
-在pom.xml中配置maven中央仓库Snapshots地址
-  ```
-<repositories>
-        <repository>
-            <id>mavenRepoCenter</id>
-            <name>Maven Development Snapshot Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-```
 ### (2).在application.yml中加入
  ```
 spring:
   jackieonway:
     sms:
-      sms-type: tentcent  # 短信服务商 暂目前只有 腾讯和阿里的短信服务，默认为ali
+      sms-type: tencent  # 短信服务商 暂目前只有 腾讯和阿里的短信服务，默认为ali
       security-key: your security-key # 短信的私钥
       appid: your appid # 短信的应用id
       sign: your sign # 短信的签名
