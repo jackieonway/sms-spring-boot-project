@@ -10,9 +10,9 @@
 ## 短信服务 Starter
 
 ### 1. 开发工具及编译
-> IntelliJ IDEA 2018.2.5
-> Maven 3.5
-> JDK 1.8
+> * IntelliJ IDEA 2018.2.5
+> * Maven 3.5
+> * JDK 1.8
 
 ### 2. 如何使用 sms-spring-boot-starter
 
