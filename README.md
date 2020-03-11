@@ -10,20 +10,20 @@
 ## 短信服务 Starter
 
 ### 1. 开发工具及编译
-> IntelliJ IDEA 2018.2.5
-> Maven 3.5
-> JDK 1.8
+> * IntelliJ IDEA 2018.2.5
+> * Maven 3.5
+> * JDK 1.8
 
 ### 2. 如何使用 sms-spring-boot-starter
 
 #### (1). 在 pom 文件中引入
 
  ```xml
-  <dependency>
-        <groupId>com.github.jackieonway.sms</groupId>
-        <artifactId>sms-spring-boot-starter</artifactId>
-        <version>0.0.1</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.jackieonway.sms</groupId>
+    <artifactId>sms-spring-boot-starter</artifactId>
+    <version>0.0.1</version>
+</dependency>
  ```
 
 #### (2). 在 application.yml 中进行配置
@@ -52,7 +52,15 @@ spring:
 #### (3). 在 Springboot 主程序上加入注解
 
  ```java
+@SpringBootApplication
 @EnabledSmsAutoConfiguration
+public class SmsDemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SmsDemoApplication.class, args);
+    }
+
+}
  ```
 
 #### (4). 创建发送短信程序
@@ -62,8 +70,8 @@ spring:
 3. 可以采用以下方法进行注入，方式与方法 2 类似：
 
 ```java
-      @Autowired
-      private SmsService tencentSmsService;
+    @Autowired
+    private SmsService tencentSmsService;
 ```
 
 > 注意: 采用方式 1 ，最终的 jar 包将会比方式 2 和方法 3 小，但是最终只有一种短信模式生效，即只能使用一个短信运营商的服务，方式 2 和 3 能快速切换短信运营商。
