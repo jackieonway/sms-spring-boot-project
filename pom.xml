@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.github.jackieonway.sms</groupId>
     <artifactId>sms-spring-boot-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>sms-spring-boot-parent</name>
     <packaging>pom</packaging>
     <properties>
@@ -31,7 +31,7 @@
 	<distributionManagement>
 		<repository>
 			<id>mvnRepoCenter</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 		<snapshotRepository>
 			<id>mvnRepoCenter</id>
@@ -90,14 +90,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
-            <!-- Javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
