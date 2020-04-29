@@ -21,12 +21,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- tencent sms sdk start -->
         <dependency>
             <groupId>com.github.qcloudsms</groupId>
             <artifactId>qcloudsms</artifactId>
             <version>1.0.6</version>
+            <optional>true</optional>
         </dependency>
         <!-- tencent sms sdk end -->
         <!-- alil sms sdk start -->
@@ -34,6 +36,7 @@
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
             <version>4.4.1</version>
+            <optional>true</optional>
         </dependency>
         <!-- alil sms sdk end -->
         <dependency>
@@ -49,11 +52,13 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
             <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.46</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>
