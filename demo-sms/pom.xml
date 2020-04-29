@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-spring-boot-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
             <!--<exclusions>
                 <exclusion>
                     <groupId>com.aliyun</groupId>
@@ -37,6 +37,12 @@
                     <artifactId>qcloudsms</artifactId>
                 </exclusion>&ndash;&gt;
             </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>com.github.qcloudsms</groupId>
+            <artifactId>qcloudsms</artifactId>
+            <version>1.0.6</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

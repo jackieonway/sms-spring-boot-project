@@ -18,7 +18,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <java.encoding>utf-8</java.encoding>
-        <dubbo.version>2.6.4</dubbo.version>
         <encoding>UTF-8</encoding>
         <maven.compile.version>3.7.0</maven.compile.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -26,6 +25,7 @@
     <modules>
         <module>sms-spring-boot-autoconfigure</module>
         <module>sms-spring-boot-starter</module>
+        <module>ucpass-client</module>
         <!--<module>demo-sms</module>-->
     </modules>
 	<distributionManagement>

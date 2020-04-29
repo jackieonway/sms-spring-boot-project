@@ -73,8 +73,11 @@ public class SmsAutoConfigure {
         @Bean
         public SmsService ucpassSmsService(SmsProperties smsProperties){
             if (SmsType.UCPASS.equals(smsProperties.getSmsType())){
+                com.github.jackieonway.sms.ucpass.entity.SmsProperties smsProperties1
+                        = new com.github.jackieonway.sms.ucpass.entity.SmsProperties();
+                smsProperties1.setRestSserver(smsProperties.getRestSserver());
                 return new UcpassSmsService(
-                    new JsonReqClient(smsProperties),
+                    new JsonReqClient(smsProperties1),
                     smsProperties);
             }
             return null;

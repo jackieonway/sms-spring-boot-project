@@ -30,7 +30,7 @@ public class HelloController {
      */
 
     @Autowired
-    private SmsService tencentSmsService;
+    private SmsService smsService;
 
 //    @Autowired
 //    private SmsService aliSmsService;
@@ -43,7 +43,7 @@ public class HelloController {
         TencentSmsRequest tencentSmsRequest = new TencentSmsRequest();
         tencentSmsRequest.setPhoneNumber(new String[]{"your cellphone"});
         tencentSmsRequest.setParams(paramst);
-        return tencentSmsService.sendTemplateSms("328921", tencentSmsRequest);
+        return smsService.sendTemplateSms("328921", tencentSmsRequest);
     }
 
    /* @GetMapping("/ali")

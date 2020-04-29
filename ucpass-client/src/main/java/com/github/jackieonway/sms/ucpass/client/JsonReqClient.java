@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.jackieonway.sms.entity.SmsProperties;
+import com.github.jackieonway.sms.ucpass.entity.SmsProperties;
 import com.github.jackieonway.sms.ucpass.HttpClientUtil;
 
 public class JsonReqClient {
@@ -40,7 +40,7 @@ public class JsonReqClient {
 			logger.info("body : {}" , body);
 			result = HttpClientUtil.postJson(url, body, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("send sms error", e);
 		}
 		return result;
 	}
@@ -62,7 +62,7 @@ public class JsonReqClient {
 			logger.info("body : {}" , body);
 			result = HttpClientUtil.postJson(url, body, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("send sms error", e);
 		}
 		return result;
 	}
@@ -84,7 +84,7 @@ public class JsonReqClient {
 			logger.info("body : {}" , body);
 			result = HttpClientUtil.postJson(url, body, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("send sms error", e);
 		}
 		return result;
 	}
@@ -105,7 +105,7 @@ public class JsonReqClient {
 			logger.info("body : {}" , body);
 			result = HttpClientUtil.postJson(url, body, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("send sms error", e);
 		}
 		return result;
 	}
@@ -128,7 +128,7 @@ public class JsonReqClient {
 			logger.info("body : {}" , body);
 			result = HttpClientUtil.postJson(url, body, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("send sms error", e);
 		}
 		return result;
 	}
@@ -147,7 +147,7 @@ public class JsonReqClient {
 			result = HttpClientUtil.postJson(url, body, null);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("send sms error", e);
 		}
 		return result;
 	}

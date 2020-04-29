@@ -48,16 +48,9 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.46</version>
+            <groupId>com.github.jackieonway.sms</groupId>
+            <artifactId>ucpass-client</artifactId>
+            <version>0.0.1</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
