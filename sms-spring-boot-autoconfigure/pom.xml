@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.github.jackieonway.sms</groupId>
         <artifactId>sms-spring-boot-parent</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>sms-spring-boot-autoconfigure</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>sms-spring-boot-autoconfigure</name>
     <packaging>jar</packaging>
 
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>ucpass-client</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.2-SNAPSHOT</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

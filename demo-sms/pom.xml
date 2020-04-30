@@ -26,24 +26,29 @@
         <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-spring-boot-starter</artifactId>
-            <version>0.0.1</version>
-            <!--<exclusions>
-                <exclusion>
-                    <groupId>com.aliyun</groupId>
-                    <artifactId>aliyun-java-sdk-core</artifactId>
-                </exclusion>
-               &lt;!&ndash; <exclusion>
-                    <groupId>com.github.qcloudsms</groupId>
-                    <artifactId>qcloudsms</artifactId>
-                </exclusion>&ndash;&gt;
-            </exclusions>-->
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
-        <dependency>
+        <!-- 腾讯短信依赖 -->
+        <!--<dependency>
             <groupId>com.github.qcloudsms</groupId>
             <artifactId>qcloudsms</artifactId>
             <version>1.0.6</version>
-            <optional>true</optional>
+        </dependency>-->
+
+        <!-- 阿里短信依赖 -->
+        <!--<dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.4.1</version>
+        </dependency>-->
+
+        <!-- 云之讯短信依赖 -->
+        <dependency>
+            <groupId>com.github.jackieonway.sms</groupId>
+            <artifactId>ucpass-client</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
