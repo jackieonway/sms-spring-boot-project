@@ -4,8 +4,11 @@
 ## 前言
 短信服务在用户注册、登录、找回密码等相关操作中，可以让用户使用更加便捷，越来越多的公司都采用短信验证的方式让用户进行操作，从而提高用户的实用性。
 
-##  Spring Boot Starter
-由于 Spring Boot 的约定大于配置的理念，使得在使用 Spring 变得更加方便。Spring Boot 项目组提供了很多 Starter，让我们在使用 Spring 的时候变得非常容易。对于官方提供的 Starter 采用 spring-boot-starter-xxx开头，对于非官方提供的Spring Boot Starter，官方建议采用 xxxx-spring-boot-starter 命名。
+##  相对于 0.0.1 版本区别
+
+1. 由于v0.0.1版本是直接将三个版本依赖同时引入，属于强依赖，因此在使用的过程中需要配置指定使用哪个短信服务商地址，
+考虑到在使用短信发送的过程中，依据最小引入的原则将所有相关的强依赖移除，从而减轻依赖关系。
+2. 使用的方式相对v0.0.1的区别不大，只是需要单独引入对应的短信服务商的依赖即可快速上手。
 
 ## 短信服务 Starter
 
@@ -22,7 +25,27 @@
 <dependency>
     <groupId>com.github.jackieonway.sms</groupId>
     <artifactId>sms-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
+    <!-- 腾讯短信依赖 -->
+    <!--<dependency>
+        <groupId>com.github.qcloudsms</groupId>
+        <artifactId>qcloudsms</artifactId>
+        <version>1.0.6</version>
+    </dependency>-->
+
+    <!-- 阿里短信依赖 -->
+    <!--<dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-core</artifactId>
+        <version>4.4.1</version>
+    </dependency>-->
+
+    <!-- 云之讯短信依赖 -->
+    <!--<dependency>
+        <groupId>com.github.jackieonway.sms</groupId>
+        <artifactId>ucpass-client</artifactId>
+        <version>0.0.2</version>
+    </dependency>-->
 </dependency>
  ```
 
@@ -48,6 +71,17 @@ spring:
       security-key: your aliyun access-key-secret # 阿里云短信服务的私钥
       region-id: cn-hangzhou # 阿里云短信服务的特有区域id
 ```
+如果是云之讯短信，请参考以下配置:
+
+```yaml
+spring:
+  jackieonway:
+    sms:
+      sms-type: ucpass  # 短信服务商 暂目前只有 腾讯和阿里的短信服务
+      access-key: your ucpass access-key-id # 阿里云短信服务的公钥
+      security-key: your ucpass access-key-secret # 阿里云短信服务的私钥
+      restSserver: open.ucpaas.comu # 云之讯短信服务地址 such as open.ucpaas.com
+```
 
 #### (3). 在 Springboot 主程序上加入注解
 
@@ -65,16 +99,14 @@ public class SmsDemoApplication {
 
 #### (4). 创建发送短信程序
 
-1. 可以采用排除相关依赖的方式注入 Service；
-2. 可以采用加 `@Qualifier("tencentSmsService")` 的方式注入 Service ，value 的可选值目前只有 `tencentSmsService` 和 `aliSmsService` 两种；
-3. 可以采用以下方法进行注入，方式与方法 2 类似：
+> 相对于 0.0.1 版本的短信服务，从 0.0.2 开始,依赖取消了版本的强依赖性，这样就需要在使用的时候显示引入相关依赖,使用注入 SmsService 时，直接注入即可
+现在支持 阿里、腾讯、云之讯短信服务
 
 ```java
     @Autowired
     private SmsService tencentSmsService;
 ```
 
-> 注意: 采用方式 1 ，最终的 jar 包将会比方式 2 和方法 3 小，但是最终只有一种短信模式生效，即只能使用一个短信运营商的服务，方式 2 和 3 能快速切换短信运营商。
 
 参考示例如下：
 
@@ -83,10 +115,7 @@ public class SmsDemoApplication {
 public class HelloController {
 
     @Autowired
-    private SmsService tencentSmsService;
-
-//    @Autowired
-//    private SmsService aliSmsService;
+    private SmsService smsService;
 
     @GetMapping("/tencent")
     public Object tencent() {
@@ -96,7 +125,7 @@ public class HelloController {
         TencentSmsRequest tencentSmsRequest = new TencentSmsRequest();
         tencentSmsRequest.setPhoneNumber(new String[]{"your cellphone"});
         tencentSmsRequest.setParams(paramst);
-        return tencentSmsService.sendTemplateSms("328921", tencentSmsRequest);
+        return smsService.sendTemplateSms("328921", tencentSmsRequest);
     }
 
     /* @GetMapping("/ali")
@@ -106,7 +135,7 @@ public class HelloController {
          aliSmsRequest.setPhoneNumbers(new String[]{"18600000000"});
          aliSmsRequest.setTemplateParam("{\"code\":\"123456\"}");
          aliSmsRequest.setSignName("xx科技");
-         return aliSmsService.sendTemplateSms("SMS_148614533",aliSmsRequest);
+         return smsService.sendTemplateSms("SMS_148614533",aliSmsRequest);
      }*/
 }
 
@@ -153,9 +182,64 @@ public class HelloController {
 该接口提供了单个和群发短信与模板短信，注意目前只提供了同步发送方法，异步发送方法，请结合线程池进行。
 
 ## 总结
-~~只是针对腾讯短信服务进行了试验，阿里的短信服务并未真正验证，~~ 目前腾讯短信服务和阿里云短信服务均已验证成功，希望各位小伙伴共同完善该 starter，觉得有用请 starter 该项目。如果只想使用而腾讯云或者阿里云短信业务的话，按照 Demo 使用即可。
 
+目前腾讯短信服务、阿里云短信服务和云之讯短信服务均已验证成功，希望各位小伙伴共同完善该 starter，觉得有用请 starter 该项目。如果只想使用而腾讯云或者阿里云短信业务的话，按照 Demo 使用即可。
 
-github地址：**[sms-spring-boot-project](https://github.com/jackieonway/sms-spring-boot-project)**
+## 如何参与贡献
+    1. Fork 本仓库到自己的仓库
+    2. 从dev分支新建自己的分支
+    3. 修改或增加代码
+    4. 提交 Pull Requests ，等待审核合并
+## 最新版本使用
 
-云之讯短信服务提供: **[bigbearLoveTingting](https://github.com/bigbearLoveTingting)**
+#### (1). 在 pom 文件中引入
+
+ ```xml
+<dependency>
+    <groupId>com.github.jackieonway.sms</groupId>
+    <artifactId>sms-spring-boot-starter</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+    <!-- 腾讯短信依赖 -->
+    <!--<dependency>
+        <groupId>com.github.qcloudsms</groupId>
+        <artifactId>qcloudsms</artifactId>
+        <version>1.0.6</version>
+    </dependency>-->
+
+    <!-- 阿里短信依赖 -->
+    <!--<dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-core</artifactId>
+        <version>4.4.1</version>
+    </dependency>-->
+
+    <!-- 云之讯短信依赖 -->
+    <!--<dependency>
+        <groupId>com.github.jackieonway.sms</groupId>
+        <artifactId>ucpass-client</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+    </dependency>-->
+</dependency>
+ ```
+### 指定使用 Snapshot Repository
+```xml
+    <repositories>
+        <repository>
+            <id>mavenRepoCenter</id>
+            <name>Maven Development Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+```
+##  感谢
+感谢参与提出意见或参与贡献的小伙伴
+
+云之讯短信服务提供: **[@bigbearLoveTingting](https://github.com/bigbearLoveTingting)**
+
+参与贡献人员 : **[@flanliulf](https://github.com/flanliulf)**
