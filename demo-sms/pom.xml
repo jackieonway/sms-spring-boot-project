@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-spring-boot-starter</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
         <!-- 腾讯短信依赖 -->
         <!--<dependency>
@@ -46,7 +46,7 @@
         <!--<dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>ucpass-client</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>-->
 
         <dependency>
