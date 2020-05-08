@@ -80,7 +80,7 @@ spring:
       sms-type: ucpass  # 短信服务商 暂目前只有 腾讯和阿里的短信服务
       access-key: your ucpass access-key-id # 阿里云短信服务的公钥
       security-key: your ucpass access-key-secret # 阿里云短信服务的私钥
-      restSserver: open.ucpaas.comu # 云之讯短信服务地址 such as open.ucpaas.com
+      restSserver: open.ucpaas.com # 云之讯短信服务地址 such as open.ucpaas.com
 ```
 
 #### (3). 在 Springboot 主程序上加入注解
@@ -104,7 +104,7 @@ public class SmsDemoApplication {
 
 ```java
     @Autowired
-    private SmsService tencentSmsService;
+    private SmsService smsService;
 ```
 
 
