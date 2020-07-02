@@ -40,7 +40,7 @@ public class TencentSmsService implements SmsService {
     public Object sendSms(@NonNull BaseRequest params) throws SmsException {
         Assert.notNull(params, "param can not be null");
         if (params instanceof TencentSmsRequest) {
-            sendBatchSms(params);
+            return sendBatchSms(params);
         }
         throw new SmsException();
     }
@@ -59,7 +59,7 @@ public class TencentSmsService implements SmsService {
     public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
         Assert.notNull(params, "param can not be null");
         if (params instanceof TencentSmsRequest) {
-            sendBatchTemplateSms(params.getTemplateId(), params);
+            return sendBatchTemplateSms(params.getTemplateId(), params);
         }
         throw new SmsException();
     }
