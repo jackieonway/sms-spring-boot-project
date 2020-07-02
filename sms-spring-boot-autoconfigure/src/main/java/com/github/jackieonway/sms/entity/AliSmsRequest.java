@@ -23,7 +23,7 @@ public class AliSmsRequest extends BaseRequest {
     /**
      * 模板id
      */
-    private String templateCode;
+    private String templateId;
 
     /**
      * 模板id参数
@@ -59,13 +59,13 @@ public class AliSmsRequest extends BaseRequest {
     }
 
     @Override
-    public String getTemplateCode() {
-        return templateCode;
+    public String getTemplateId() {
+        return templateId;
     }
 
     @Override
-    public void setTemplateCode(String templateCode) {
-        this.templateCode = templateCode;
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
     }
 
     public String getTemplateParam() {
@@ -105,7 +105,7 @@ public class AliSmsRequest extends BaseRequest {
         return "AliSmsRequest{" +
                 "phoneNumbers=" + Arrays.toString(phoneNumbers) +
                 ", signName='" + signName + '\'' +
-                ", templateCode='" + templateCode + '\'' +
+                ", templateId='" + templateId + '\'' +
                 ", templateParam='" + templateParam + '\'' +
                 ", smsUpExtendCode='" + smsUpExtendCode + '\'' +
                 ", outId='" + outId + '\'' +

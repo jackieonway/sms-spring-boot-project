@@ -39,7 +39,7 @@ public class UcpassSmsService implements SmsService {
     @Override
     public Object sendSms(@NonNull BaseRequest params) throws SmsException {
         Assert.notNull(params, "param can not be null");
-        return sendTemplateSms(params.getTemplateCode(), params);
+        return sendTemplateSms(params.getTemplateId(), params);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class UcpassSmsService implements SmsService {
     @Override
     public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
         Assert.notNull(params, "param can not be null");
-        return sendBatchTemplateSms(params.getTemplateCode(), params);
+        return sendBatchTemplateSms(params.getTemplateId(), params);
     }
 
     @Override

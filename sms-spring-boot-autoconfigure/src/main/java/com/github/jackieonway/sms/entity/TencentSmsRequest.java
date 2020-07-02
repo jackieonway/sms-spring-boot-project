@@ -99,10 +99,12 @@ public class TencentSmsRequest extends BaseRequest {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
     public String getTemplateId() {
         return templateId;
     }
 
+    @Override
     public void setTemplateId(String templateId) {
         this.templateId = templateId;
     }

@@ -41,7 +41,7 @@ public class AliSmsService implements SmsService {
         request.setSysAction("SendSms");
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
-            setSingleSmsParams(request, aliSmsRequest, aliSmsRequest.getTemplateCode());
+            setSingleSmsParams(request, aliSmsRequest, aliSmsRequest.getTemplateId());
             setOtherParams(request, aliSmsRequest);
             try {
                 return iAcsClient.getCommonResponse(request);
@@ -77,7 +77,7 @@ public class AliSmsService implements SmsService {
         CommonRequest request = setCommonRequest();
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
-            String templateCode = aliSmsRequest.getTemplateCode();
+            String templateCode = aliSmsRequest.getTemplateId();
             setMultiSmsParams(request, aliSmsRequest, templateCode);
             setOtherParams(request, aliSmsRequest);
             try {

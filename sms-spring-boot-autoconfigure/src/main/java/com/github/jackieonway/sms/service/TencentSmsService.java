@@ -59,7 +59,7 @@ public class TencentSmsService implements SmsService {
     public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
         Assert.notNull(params, "param can not be null");
         if (params instanceof TencentSmsRequest) {
-            sendBatchTemplateSms(params.getTemplateCode(), params);
+            sendBatchTemplateSms(params.getTemplateId(), params);
         }
         throw new SmsException();
     }
