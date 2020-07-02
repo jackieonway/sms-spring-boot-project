@@ -3,6 +3,8 @@ package com.github.jackieonway.sms.entity;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
+import java.util.Map;
+
 /**
  * @author Jackie
  * @version \$id: SmsProperties.java v 0.1 2019-05-11 10:03 Jackie Exp $$
@@ -11,7 +13,8 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 public class SmsProperties {
 
     @NestedConfigurationProperty
-    private SmsType smsType = SmsType.ALI;
+    private SmsTypeEnum smsType = SmsTypeEnum.ALI;
+
 
     /**
      * 短信应用商服务地址
@@ -19,35 +22,38 @@ public class SmsProperties {
     private String appid;
 
     /**
+     * 域名地址
+     */
+    private String domain;
+    /**
+     * 版本
+     */
+    private String version;
+    /**
      * 短信服务商应用公钥
      */
     private String accessKey;
 
     /**
-     *  短信服务商应用私钥
+     * 短信服务商应用私钥
      */
     private String securityKey;
 
     /**
-     * 阿里云短信特有-区域id
+     * 区域
      */
-    private String regionId;
+    private String region;
 
     /**
-     * 短信服务商短信签名
+     * 其余参数
      */
-    private String sign;
+    private Map<String, String> maps;
 
-    /**
-     *  云之讯服务地址
-     */
-    private String restSserver;
-
-    public SmsType getSmsType() {
+    public SmsTypeEnum getSmsType() {
         return smsType;
     }
 
-    public void setSmsType(SmsType smsType) {
+    public void setSmsType(SmsTypeEnum smsType) {
         this.smsType = smsType;
     }
 
@@ -57,6 +63,22 @@ public class SmsProperties {
 
     public void setAppid(String appid) {
         this.appid = appid;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getAccessKey() {
@@ -75,41 +97,33 @@ public class SmsProperties {
         this.securityKey = securityKey;
     }
 
-    public String getRegionId() {
-        return regionId;
+    public String getRegion() {
+        return region;
     }
 
-    public void setRegionId(String regionId) {
-        this.regionId = regionId;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public String getSign() {
-        return sign;
+    public Map<String, String> getMaps() {
+        return maps;
     }
 
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public String getRestSserver() {
-        return restSserver;
-    }
-
-    public void setRestSserver(String restSserver) {
-        this.restSserver = restSserver;
+    public void setMaps(Map<String, String> maps) {
+        this.maps = maps;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("\"smsType\":").append(smsType);
-        sb.append(",\"appid\":\"").append(appid).append('\"');
-        sb.append(",\"accessKey\":\"").append(accessKey).append('\"');
-        sb.append(",\"securityKey\":\"").append(securityKey).append('\"');
-        sb.append(",\"regionId\":\"").append(regionId).append('\"');
-        sb.append(",\"sign\":\"").append(sign).append('\"');
-        sb.append(",\"restSserver\":\"").append(restSserver).append('\"');
-        sb.append("}");
-        return sb.toString();
+        return "SmsProperties{" +
+                "smsType=" + smsType +
+                ", appid='" + appid + '\'' +
+                ", domain='" + domain + '\'' +
+                ", version='" + version + '\'' +
+                ", accessKey='" + accessKey + '\'' +
+                ", securityKey='" + securityKey + '\'' +
+                ", region='" + region + '\'' +
+                ", maps=" + maps +
+                '}';
     }
 }
