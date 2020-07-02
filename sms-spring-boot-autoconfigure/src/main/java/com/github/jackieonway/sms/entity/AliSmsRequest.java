@@ -1,20 +1,43 @@
 package com.github.jackieonway.sms.entity;
 
+import java.util.Arrays;
+
 /**
+ * 阿里云sms请求参数
+ *
  * @author Jackie
  * @version \$id: AliSmsRequest.java v 0.1 2019-05-17 21:19 Jackie Exp $$
+ * @see <a href="https://help.aliyun.com/document_detail/101414.html?spm=a2c4g.11186623.2.13.18d73e2c7CYL6S"></a>
  */
 public class AliSmsRequest extends BaseRequest {
+    /**
+     * 手机号
+     */
     private String[] phoneNumbers;
 
+    /**
+     * 签名
+     */
     private String signName;
 
+    /**
+     * 模板id
+     */
     private String templateCode;
 
+    /**
+     * 模板id参数
+     */
     private String templateParam;
 
+    /**
+     * 上行短信扩展码
+     */
     private String smsUpExtendCode;
 
+    /**
+     * 外部流水扩展字段
+     */
     private String outId;
 
     private boolean isSendBatchSms = false;
@@ -35,10 +58,12 @@ public class AliSmsRequest extends BaseRequest {
         this.signName = signName;
     }
 
+    @Override
     public String getTemplateCode() {
         return templateCode;
     }
 
+    @Override
     public void setTemplateCode(String templateCode) {
         this.templateCode = templateCode;
     }
@@ -73,5 +98,18 @@ public class AliSmsRequest extends BaseRequest {
 
     public void setIsSendBatchSms(boolean isSendBatchSms) {
         this.isSendBatchSms = isSendBatchSms;
+    }
+
+    @Override
+    public String toString() {
+        return "AliSmsRequest{" +
+                "phoneNumbers=" + Arrays.toString(phoneNumbers) +
+                ", signName='" + signName + '\'' +
+                ", templateCode='" + templateCode + '\'' +
+                ", templateParam='" + templateParam + '\'' +
+                ", smsUpExtendCode='" + smsUpExtendCode + '\'' +
+                ", outId='" + outId + '\'' +
+                ", isSendBatchSms=" + isSendBatchSms +
+                '}';
     }
 }

@@ -3,8 +3,10 @@ package com.github.jackieonway.sms.entity;
 
 /**
  * 云之讯短信平台接口参数
+ *
  * @author bigbearLoveTingting
  * @version \$id: UcpassSmsRequest.java v 0.1 2019-7-15 14:27 bigbearLoveTingting Exp $$
+ * @see <a href="http://docs.ucpaas.com/doku.php?id=%E7%9F%AD%E4%BF%A1:sendsms"></a>
  */
 public class UcpassSmsRequest extends BaseRequest {
 

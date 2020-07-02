@@ -4,17 +4,17 @@ package com.github.jackieonway.sms.entity;
  * @author Jackie
  * @version \$id: SmsType.java v 0.1 2019-05-11 10:29 Jackie Exp $$
  */
-public enum SmsType {
+public enum SmsTypeEnum {
 
     /**
      * 阿里短信服务
      */
-    ALI("ali","阿里短信服务"),
+    ALI("ali", "阿里短信服务"),
 
     /**
      * 腾讯短信服务
      */
-    TENCENT("tencent","腾讯短信服务"),
+    TENCENT("tencent", "腾讯短信服务"),
 
     /**
      * 云之讯短信平台
@@ -25,7 +25,7 @@ public enum SmsType {
 
     private String desc;
 
-    SmsType(String type, String desc) {
+    SmsTypeEnum(String type, String desc) {
         this.type = type;
         this.desc = desc;
     }
@@ -38,12 +38,12 @@ public enum SmsType {
         return desc;
     }
 
-    public SmsType getSmsTypeByType(String type){
-        if (type == null || type.trim().length()<1){
+    public SmsTypeEnum getSmsTypeByType(String type) {
+        if (type == null || type.trim().length() < 1) {
             return null;
         }
-        for (SmsType smsType:values()) {
-            if (smsType.getType().equalsIgnoreCase(type)){
+        for (SmsTypeEnum smsType : values()) {
+            if (smsType.getType().equalsIgnoreCase(type)) {
                 return smsType;
             }
         }
