@@ -5,8 +5,10 @@ package com.github.jackieonway.sms.exception;
  * @version \$id: SmsException.java v 0.1 2019-06-16 18:39 Jackie Exp $$
  */
 public class SmsException extends RuntimeException {
+    private static final String SYS_TYPE_CONFIG_ERROR_MSG = "短信服务商信息配置错误";
+
     public SmsException() {
-        super();
+        super(SYS_TYPE_CONFIG_ERROR_MSG);
     }
 
     public SmsException(String message) {
@@ -18,7 +20,7 @@ public class SmsException extends RuntimeException {
     }
 
     public SmsException(Throwable cause) {
-        super(cause);
+        super(SYS_TYPE_CONFIG_ERROR_MSG, cause);
     }
 
 }
