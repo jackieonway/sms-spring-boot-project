@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.autoconfigure;
 
+import com.aliyuncs.IAcsClient;
 import com.github.jackieonway.sms.annotion.EnabledSmsAutoConfiguration;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.SmsTypeEnum;
@@ -7,7 +8,10 @@ import com.github.jackieonway.sms.service.AliSmsService;
 import com.github.jackieonway.sms.service.SmsService;
 import com.github.jackieonway.sms.service.TencentSmsService;
 import com.github.jackieonway.sms.service.UcpassSmsService;
+import com.github.jackieonway.sms.ucpass.client.JsonReqClient;
+import com.tencentcloudapi.sms.v20190711.SmsClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +26,7 @@ import org.springframework.context.annotation.Configuration;
 public class SmsAutoConfigure {
 
     @Configuration
+    @ConditionalOnClass({SmsClient.class})
     public static class TentcentSmsServiceConfiguration {
 
         @Bean
@@ -34,6 +39,7 @@ public class SmsAutoConfigure {
     }
 
     @Configuration
+    @ConditionalOnClass({IAcsClient.class})
     public static class AliSmsServiceConfiguration {
 
         @Bean
@@ -46,6 +52,7 @@ public class SmsAutoConfigure {
     }
 
     @Configuration
+    @ConditionalOnClass({JsonReqClient.class})
     public static class UCPassSmsServiceConfiguration {
 
         @Bean

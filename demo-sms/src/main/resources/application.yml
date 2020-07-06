@@ -5,3 +5,4 @@ spring:
       security-key: your security-key
       appid: your appid
       sign: your sign
+      region: tencent region

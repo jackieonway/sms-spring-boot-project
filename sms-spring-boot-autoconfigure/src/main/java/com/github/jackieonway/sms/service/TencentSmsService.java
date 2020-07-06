@@ -76,7 +76,6 @@ public class TencentSmsService implements SmsService {
             try {
                 return smsClient.SendSms(request);
             } catch (TencentCloudSDKException e) {
-                e.printStackTrace();
                 LOGGER.error("send message error", e);
                 throw new SmsException(e);
             }

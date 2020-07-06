@@ -36,7 +36,9 @@ public class HelloController {
         TencentSmsRequest tencentSmsRequest = new TencentSmsRequest();
         tencentSmsRequest.setPhoneNumber(new String[]{"your cellphone"});
         tencentSmsRequest.setParams(paramst);
-        return smsService.sendTemplateSms("328921", tencentSmsRequest);
+        tencentSmsRequest.setSign("your sign");
+         smsService.asyncSendTemplateSms("328921", tencentSmsRequest);
+         return "asd";
     }
 
    /* @GetMapping("/ali")
