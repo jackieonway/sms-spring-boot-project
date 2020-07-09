@@ -31,8 +31,8 @@ public class SubMailClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubMailClient.class);
     private static final String MESSAGE_SEND_URL = "https://api.mysubmail.com/message/send.json";
     private static final String MESSAGE_BATCH_SEND_URL = "https://api.mysubmail.com/message/multisend.json";
-    private static final String MESSAGE_SEND_TEMPLATE_URL = "https://api.mysubmail.com/message/xsend.json";
-    private static final String MESSAGE_BATCH_SEND_TEMPLATE_URL = "https://api.mysubmail.com/message/multixsend.json";
+    private static final String MESSAGE_TEMPLATE_SEND_URL = "https://api.mysubmail.com/message/xsend.json";
+    private static final String MESSAGE_BATCH_TEMPLATE_SEND_URL = "https://api.mysubmail.com/message/multixsend.json";
     private static final String API_TIMESTAMP = "http://api.submail.cn/service/timestamp.json";
     public static final String SIGNATURE = "signature";
     public static final String APPID = "appid";
@@ -88,7 +88,7 @@ public class SubMailClient {
         if (StringUtils.hasText(vars)) {
             maps.put("vars", vars);
         }
-        return send(MESSAGE_SEND_TEMPLATE_URL, params, maps);
+        return send(MESSAGE_TEMPLATE_SEND_URL, params, maps);
     }
 
     /**
@@ -128,7 +128,7 @@ public class SubMailClient {
         Map<String, Object> maps = new HashMap<>();
         maps.put("project", projectId);
         maps.put("multi", GsonUtils.gson2String(multi));
-        return send(MESSAGE_BATCH_SEND_TEMPLATE_URL, params, maps);
+        return send(MESSAGE_BATCH_TEMPLATE_SEND_URL, params, maps);
     }
 
     private String send(String url, SubMailParams params, Map<String, Object> map) {
