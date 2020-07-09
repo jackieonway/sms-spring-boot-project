@@ -26,8 +26,8 @@
         <module>sms-spring-boot-autoconfigure</module>
         <module>sms-spring-boot-starter</module>
         <module>ucpass-client</module>
-        <module>submail-client</module>
         <!--<module>demo-sms</module>-->
+        <module>submail-client</module>
     </modules>
 	<distributionManagement>
 		<repository>
