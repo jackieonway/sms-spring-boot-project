@@ -46,6 +46,12 @@
         <artifactId>ucpass-client</artifactId>
         <version>0.0.2</version>
     </dependency>-->
+    <!-- 赛邮短信依赖 -->
+        <!--<dependency>
+            <groupId>com.github.jackieonway.sms</groupId>
+            <artifactId>submail-client</artifactId>
+            <version>0.0.2</version>
+    </dependency>-->
 </dependency>
  ```
 
