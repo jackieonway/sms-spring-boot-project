@@ -27,11 +27,11 @@
     <artifactId>sms-spring-boot-starter</artifactId>
     <version>0.0.2</version>
     <!-- 腾讯短信依赖 -->
-    <!--<dependency>
-        <groupId>com.github.qcloudsms</groupId>
-        <artifactId>qcloudsms</artifactId>
-        <version>1.0.6</version>
-    </dependency>-->
+   <!--  <dependency>
+           <groupId>com.tencentcloudapi</groupId>
+           <artifactId>tencentcloud-sdk-java</artifactId>
+           <version>3.1.83</version>
+        </dependency>-->
 
     <!-- 阿里短信依赖 -->
     <!--<dependency>
