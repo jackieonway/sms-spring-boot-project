@@ -56,4 +56,15 @@ public class SmsAutoConfigure {
             return null;
         }
     }
+
+    @Configuration
+    public static class SubMailServiceConfiguration {
+        @Bean
+        public SmsService subMailService(SmsProperties properties) {
+            if (SmsTypeEnum.SUBMAIL.equals(properties.getSmsType())) {
+                return new UcpassSmsService(properties);
+            }
+            return null;
+        }
+    }
 }
