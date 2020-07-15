@@ -69,7 +69,7 @@ public class SmsAutoConfigure {
         @Bean
         public SmsService subMailService(SmsProperties properties) {
             if (SmsTypeEnum.SUBMAIL.equals(properties.getSmsType())) {
-                return new UcpassSmsService(properties);
+                return new SubMailSmsServiceImpl(properties);
             }
             return null;
         }
