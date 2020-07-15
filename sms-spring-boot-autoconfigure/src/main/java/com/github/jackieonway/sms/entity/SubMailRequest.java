@@ -9,8 +9,7 @@ import java.util.Map;
  * 赛邮云通信 sms
  *
  * @author bing_huang
- * @date 2020/07/09 9:14
- * @since V1.0
+ * @since V1.0 2020/07/09 9:14
  */
 public class SubMailRequest extends BaseRequest {
     /**

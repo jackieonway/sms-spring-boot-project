@@ -20,7 +20,7 @@ public class JsonReqClient {
 
 	private StringBuffer getStringBuffer() {
 		StringBuffer sb = new StringBuffer("https://");
-		sb.append(smsProperties.getRestSserver()).append("/ol/sms");
+		sb.append(smsProperties.getRestServer()).append("/ol/sms");
 		return sb;
 	}
 	public String sendSms(String sid, String token, String appid, String templateid, String param, String mobile,

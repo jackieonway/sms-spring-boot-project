@@ -4,9 +4,8 @@ package com.github.jackieonway.sms.submail.model;
  * subMail properties
  *
  * @author bing_huang
- * @date 2020/07/08 8:53
  * @see <a href="https://www.mysubmail.com/chs/documents/developer/YPWD84"></a>
- * @since V1.0
+ * @since V1.0 2020/07/08 8:53
  */
 public class SubMailProperties {
     /**

@@ -38,6 +38,7 @@ public class OkHttpClientUtil {
 
     /**
      * 单例模式获取 NetUtils
+     * @return {@link OkHttpClientUtil}
      */
     public static OkHttpClientUtil getInstance() {
         if (mInstance == null) {

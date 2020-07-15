@@ -4,8 +4,7 @@ package com.github.jackieonway.sms.submail.utils;
  * 签名类型
  *
  * @author bing_huang
- * @date 2020/07/09 7:40
- * @since V1.0
+ * @since V1.0 2020/07/09 7:40
  */
 public enum SignTypeEnum {
     /**
@@ -28,9 +27,5 @@ public enum SignTypeEnum {
 
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

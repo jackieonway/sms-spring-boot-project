@@ -15,8 +15,7 @@ import java.util.Map;
  * request Encoder
  *
  * @author bing_huang
- * @date 2020/07/09 7:36
- * @since V1.0
+ * @since V1.0 2020/07/09 7:36
  */
 public class RequestEncoder {
 

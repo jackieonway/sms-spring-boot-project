@@ -24,8 +24,7 @@ import java.util.Objects;
  * submail send client
  *
  * @author bing_huang
- * @date 2020/07/09 7:49
- * @since V1.0
+ * @since V1.0 2020/07/09 7:49
  */
 public class SubMailClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubMailClient.class);
@@ -34,11 +33,11 @@ public class SubMailClient {
     private static final String MESSAGE_TEMPLATE_SEND_URL = "https://api.mysubmail.com/message/xsend.json";
     private static final String MESSAGE_BATCH_TEMPLATE_SEND_URL = "https://api.mysubmail.com/message/multixsend.json";
     private static final String API_TIMESTAMP = "http://api.submail.cn/service/timestamp.json";
-    public static final String SIGNATURE = "signature";
-    public static final String APPID = "appid";
-    public static final String SIGN_TYPE = "sign_type";
-    public static final String TIMESTAMP = "timestamp";
-    public static final String TAG = "tag";
+    private static final String SIGNATURE = "signature";
+    private static final String APPID = "appid";
+    private static final String SIGN_TYPE = "sign_type";
+    private static final String TIMESTAMP = "timestamp";
+    private static final String TAG = "tag";
     private final SubMailProperties properties;
 
     public SubMailClient(SubMailProperties properties) {

@@ -6,9 +6,8 @@ import com.github.jackieonway.sms.submail.utils.SignTypeEnum;
  * request params
  *
  * @author bing_huang
- * @date 2020/07/08 9:02
  * @see <a href="https://www.mysubmail.com/chs/documents/developer/YPWD84">请求参数</a>
- * @since V1.0
+ * @since V1.0 2020/07/08 9:02
  */
 public class SubMailParams {
     /**

@@ -19,9 +19,8 @@ import java.util.List;
  * 赛邮短信服务
  *
  * @author bing_huang
- * @date 2020/07/09 8:12
  * @see <a href="https://www.mysubmail.com/chs/documents/developer/index"></a>
- * @since V1.0
+ * @since V1.0 2020/07/09 8:12
  */
 public class SubMailSmsServiceImpl implements SmsService {
     private final SubMailClient client;

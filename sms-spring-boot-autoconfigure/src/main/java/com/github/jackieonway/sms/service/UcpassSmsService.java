@@ -22,7 +22,7 @@ public class UcpassSmsService implements SmsService {
     public UcpassSmsService(SmsProperties smsProperties) {
         com.github.jackieonway.sms.ucpass.entity.SmsProperties smsProperties1
                 = new com.github.jackieonway.sms.ucpass.entity.SmsProperties();
-        smsProperties1.setRestSserver(smsProperties.getDomain());
+        smsProperties1.setRestServer(smsProperties.getDomain());
         this.smsProperties = smsProperties;
         this.jsonReqClient = new JsonReqClient(smsProperties1);
     }

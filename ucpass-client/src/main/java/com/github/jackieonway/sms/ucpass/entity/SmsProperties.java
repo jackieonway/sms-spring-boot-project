@@ -9,21 +9,21 @@ public class SmsProperties {
     /**
      *  云之讯服务地址
      */
-    private String restSserver;
+    private String restServer;
 
 
-    public String getRestSserver() {
-        return restSserver;
+    public String getRestServer() {
+        return restServer;
     }
 
-    public void setRestSserver(String restSserver) {
-        this.restSserver = restSserver;
+    public void setRestServer(String restSserver) {
+        this.restServer = restSserver;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
-        sb.append(",\"restSserver\":\"").append(restSserver).append('\"');
+        sb.append(",\"restServer\":\"").append(restServer).append('\"');
         sb.append("}");
         return sb.toString();
     }

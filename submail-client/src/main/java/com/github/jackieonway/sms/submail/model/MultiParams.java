@@ -6,10 +6,9 @@ import java.util.Map;
  * 批量发送multi参数
  *
  * @author bing_huang
- * @date 2020/07/08 9:11
  * @see <a href="https://www.mysubmail.com/chs/documents/developer/fsSgK1"></a>
  * @see <a href="https://www.mysubmail.com/chs/documents/developer/vNvBE"></a>
- * @since V1.0
+ * @since V1.0 2020/07/08 9:11
  */
 public class MultiParams {
     private String to;

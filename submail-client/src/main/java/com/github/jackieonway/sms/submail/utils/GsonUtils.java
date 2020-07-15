@@ -19,7 +19,7 @@ import java.util.Map;
  * @since V1.0
  */
 public class GsonUtils {
-    private static Gson gson = null;
+    private static Gson gson;
 
     static {
         gson = new Gson();
@@ -31,6 +31,8 @@ public class GsonUtils {
 
     /**
      * 对象转成json
+     * @param object 待转对象
+     * @return json字符串
      */
     public static String gson2String(Object object) {
         String gsonString = null;
@@ -42,6 +44,10 @@ public class GsonUtils {
 
     /**
      * Json转成对象
+     * @param gsonString json字符串
+     * @param cls 目标对象class
+     * @param <T> 目标对象
+     * @return 目标对象
      */
     public static <T> T gsonToBean(String gsonString, Class<T> cls) {
         T t = null;
@@ -52,7 +58,12 @@ public class GsonUtils {
     }
 
     /**
-     * json转成list<T>
+     * json转成list
+     * Json转成对象
+     * @param gsonString json字符串
+     * @param cls 目标对象class
+     * @param <T> 目标对象
+     * @return 目标对象集合
      */
     public static <T> List<T> jsonToList(String gsonString, Class<T> cls) {
         List<T> list = null;
@@ -66,6 +77,10 @@ public class GsonUtils {
 
     /**
      * json转成map的
+     * Json转成对象
+     * @param gsonString json字符串
+     * @param <T> 目标对象
+     * @return 目标对象Map集合
      */
     public static <T> Map<String, T> jsonToMaps(String gsonString) {
         Map<String, T> map = null;
@@ -78,6 +93,8 @@ public class GsonUtils {
 
     /**
      * 将object对象转成json字符串
+     * @param object 待转对象
+     * @return json字符串
      */
     public static String json2String(Object object) {
         String gsonString = null;
@@ -90,6 +107,10 @@ public class GsonUtils {
 
     /**
      * 将gsonString转成泛型bean
+     * @param gsonString json字符串
+     * @param cls 目标对象class
+     * @param <T> 目标对象
+     * @return 目标对象
      */
     public static <T> T json2Bean(String gsonString, Class<T> cls) {
         T t = null;
@@ -102,10 +123,14 @@ public class GsonUtils {
     /**
      * 转成list
      * 解决泛型在编译期类型被擦除导致报错
+     * @param json json字符串
+     * @param cls 目标对象class
+     * @param <T> 目标对象
+     * @return 目标对象集合
      */
     public static <T> List<T> json2List(String json, Class<T> cls) {
         Gson gson = new Gson();
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         JsonArray array = JsonParser.parseString(json).getAsJsonArray();
         for (final JsonElement elem : array) {
             list.add(gson.fromJson(elem, cls));
@@ -116,6 +141,9 @@ public class GsonUtils {
 
     /**
      * 转成list中有map的
+     * @param gsonString json字符串
+     * @param <T> 目标对象
+     * @return 目标对象
      */
     public static <T> List<Map<String, T>> json2ListMaps(String gsonString) {
         List<Map<String, T>> list = null;
@@ -130,6 +158,9 @@ public class GsonUtils {
 
     /**
      * 转成map的
+     * @param gsonString json字符串
+     * @param <T> 目标对象
+     * @return 目标对象Map集合
      */
     public static <T> Map<String, T> json2Maps(String gsonString) {
         Map<String, T> map = null;
@@ -142,11 +173,15 @@ public class GsonUtils {
 
     /**
      * 转成map
+     * @param gsonString json字符串
+     * @param clazz 目标对象
+     * @param <T> 目标对象
+     * @return 目标对象Map集合
      */
-    public static <T, clazz> Map<String, T> json2Maps(String gsonString, Class<T> clazz) {
+    public static <T> Map<String, T> json2Maps(String gsonString, Class<T> clazz) {
         Map<String, T> map = null;
         if (gson != null) {
-            map = gson.fromJson(gsonString, new TypeToken<Map<String, clazz>>() {
+            map = gson.fromJson(gsonString, new TypeToken<Map<String, T>>() {
             }.getType());
         }
         return map;
