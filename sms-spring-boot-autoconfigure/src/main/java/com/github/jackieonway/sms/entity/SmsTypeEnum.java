@@ -19,7 +19,12 @@ public enum SmsTypeEnum {
     /**
      * 云之讯短信平台
      */
-    UCPASS("ucpass", "云之讯短信服务");
+    UCPASS("ucpass", "云之讯短信服务"),
+    /**
+     * 赛邮云通信平台
+     */
+    SUBMAIL("submail", "赛邮短信服务"),
+    ;
 
     private String type;
 

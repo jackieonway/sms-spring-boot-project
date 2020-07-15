@@ -46,6 +46,12 @@
         <artifactId>ucpass-client</artifactId>
         <version>0.0.2</version>
     </dependency>-->
+    <!-- 赛邮短信依赖 -->
+        <!--<dependency>
+            <groupId>com.github.jackieonway.sms</groupId>
+            <artifactId>submail-client</artifactId>
+            <version>0.0.2</version>
+    </dependency>-->
 </dependency>
  ```
 
@@ -59,6 +65,7 @@ spring:
       security-key: your security-key # 短信的私钥
       appid: your appid # 短信的应用id
       sign: your sign # 短信的签名
+      region: 
 ```
 如果是阿里云短信，请参考以下配置:
 
@@ -69,7 +76,9 @@ spring:
       sms-type: ali  # 短信服务商 暂目前只有 腾讯和阿里的短信服务，默认为ali
       access-key: your aliyun access-key-id # 阿里云短信服务的公钥
       security-key: your aliyun access-key-secret # 阿里云短信服务的私钥
-      region-id: cn-hangzhou # 阿里云短信服务的特有区域id
+      domain: # 阿里云 域名
+      region: cn-hangzhou # 阿里云短信服务的区域id
+      version: 
 ```
 如果是云之讯短信，请参考以下配置:
 
@@ -78,9 +87,22 @@ spring:
   jackieonway:
     sms:
       sms-type: ucpass  # 短信服务商 暂目前只有 腾讯和阿里的短信服务
+      appid: 
+      
       access-key: your ucpass access-key-id # 阿里云短信服务的公钥
       security-key: your ucpass access-key-secret # 阿里云短信服务的私钥
-      restSserver: open.ucpaas.com # 云之讯短信服务地址 such as open.ucpaas.com
+      domain: open.ucpaas.com # 云之讯短信服务地址 such as open.ucpaas.com
+```
+
+如果是赛邮，请参考以下配置:
+
+```yaml
+spring:
+  jackieonway:
+    sms:
+      sms-type: submail  # 短信服务商 暂目前只有 腾讯和阿里的短信服务
+      appid:   # 赛邮appId
+      security-key: # 赛邮appkey
 ```
 
 #### (3). 在 Springboot 主程序上加入注解
