@@ -61,7 +61,7 @@
 spring:
   jackieonway:
     sms:
-      sms-type: tencent  # 短信服务商 暂目前只有 腾讯和阿里的短信服务，默认为ali
+      sms-type: tencent  # 短信服务商，默认为ali
       security-key: your security-key # 短信的私钥
       appid: your appid # 短信的应用id
       sign: your sign # 短信的签名
@@ -73,7 +73,7 @@ spring:
 spring:
   jackieonway:
     sms:
-      sms-type: ali  # 短信服务商 暂目前只有 腾讯和阿里的短信服务，默认为ali
+      sms-type: ali  # 短信服务商，默认为ali
       access-key: your aliyun access-key-id # 阿里云短信服务的公钥
       security-key: your aliyun access-key-secret # 阿里云短信服务的私钥
       domain: # 阿里云 域名
@@ -86,11 +86,10 @@ spring:
 spring:
   jackieonway:
     sms:
-      sms-type: ucpass  # 短信服务商 暂目前只有 腾讯和阿里的短信服务
+      sms-type: ucpass  # 短信服务商 ，默认为ali
       appid: 
-      
-      access-key: your ucpass access-key-id # 阿里云短信服务的公钥
-      security-key: your ucpass access-key-secret # 阿里云短信服务的私钥
+      access-key: your ucpass access-key-id #云之讯短信服务的公钥
+      security-key: your ucpass access-key-secret # 云之讯短信服务的私钥
       domain: open.ucpaas.com # 云之讯短信服务地址 such as open.ucpaas.com
 ```
 
@@ -100,7 +99,7 @@ spring:
 spring:
   jackieonway:
     sms:
-      sms-type: submail  # 短信服务商 暂目前只有 腾讯和阿里的短信服务
+      sms-type: submail  # 短信服务商，默认为ali
       appid:   # 赛邮appId
       security-key: # 赛邮appkey
 ```
@@ -164,10 +163,10 @@ public class HelloController {
 ```
 
 #### (5). 发送
-访问 localhost:8080/tencent
+访问 http://localhost:8080/tencent
 ![发送结果](https://upload-images.jianshu.io/upload_images/12660257-e408bef0f9735a2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-访问 http://localhost:8080/ali，短信发送成功：
+访问 http://localhost:8080/ali ，短信发送成功：
 
 ![image-20200311121852665](http://img.cdn.kuaidiba.cn/md/2020-03-11-041853.png)
 
@@ -203,9 +202,9 @@ public class HelloController {
 ```
 该接口提供了单个和群发短信与模板短信，注意目前只提供了同步发送方法，异步发送方法，请结合线程池进行。
 
-## 总结
+## 结语
 
-目前腾讯短信服务、阿里云短信服务和云之讯短信服务均已验证成功，希望各位小伙伴共同完善该 starter，觉得有用请 starter 该项目。如果只想使用而腾讯云或者阿里云短信业务的话，按照 Demo 使用即可。
+目前腾讯短信服务、阿里云短信服务和云之讯短信服务均已验证成功，希望各位小伙伴共同完善该 starter，觉得有用请 starter 该项目。如果只想使用而腾讯云、阿里云等短信业务的话，按照 Demo 使用即可。
 
 ## 如何参与贡献
     1. Fork 本仓库到自己的仓库
@@ -241,6 +240,12 @@ public class HelloController {
         <artifactId>ucpass-client</artifactId>
         <version>0.0.2-SNAPSHOT</version>
     </dependency>-->
+   <!-- 赛邮短信依赖 -->
+   <!--<dependency>
+         <groupId>com.github.jackieonway.sms</groupId>
+         <artifactId>submail-client</artifactId>
+         <version>0.0.2</version>
+    </dependency>-->
 </dependency>
  ```
 ### 指定使用 Snapshot Repository
@@ -263,5 +268,7 @@ public class HelloController {
 感谢参与提出意见或参与贡献的小伙伴
 
 云之讯短信服务提供: **[@bigbearLoveTingting](https://github.com/bigbearLoveTingting)**
+赛邮云短信服务提供: **[@hb0730](https://github.com/hb0730)**
 
-参与贡献人员 : **[@flanliulf](https://github.com/flanliulf)**
+参与贡献人员 : **[@flanliulf](https://github.com/flanliulf)**  **[@hb0730](https://github.com/hb0730)**
+
