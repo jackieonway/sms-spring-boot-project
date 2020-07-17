@@ -56,11 +56,11 @@ public interface SmsService {
      * @param templateId 短信模板id
      * @param params     根据对应的短信服务商所需信息填写
      */
-    @Async
+    @Async(value = "executorService")
     default void asyncSendTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException{
         Object sendTemplateSms = this.sendTemplateSms(templateId, params);
-        log.info("Async send sms , request templateId:[{}], " +
-                "request prams:[{}], result:[{}]", templateId, params, sendTemplateSms);
+        log.info("Async Thread [{}] send sms , request templateId:[{}], " +
+                "request prams:[{}], result:[{}]", Thread.currentThread().getName(), templateId, params, sendTemplateSms);
     }
 
     /**
@@ -69,10 +69,10 @@ public interface SmsService {
      * @param templateId 短信模板id
      * @param params     根据对应的短信服务商所需信息填写
      */
-    @Async
+    @Async(value = "executorService")
     default void asnycSendBatchTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException{
         Object sendTemplateSms = this.sendTemplateSms(templateId, params);
-        log.info("Async send batch sms , request templateId:[{}], " +
-                "request prams:[{}], result:[{}]", templateId, params, sendTemplateSms);
+        log.info("Async Thread [{}] send batch sms , request templateId:[{}], " +
+                "request prams:[{}], result:[{}]", Thread.currentThread().getName(),templateId, params, sendTemplateSms);
     }
 }
