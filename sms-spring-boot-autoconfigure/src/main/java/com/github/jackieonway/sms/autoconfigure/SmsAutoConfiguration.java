@@ -31,15 +31,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Jackie
- * @version \$id: SmsAutoConfigure.java v 0.1 2019-05-11 10:03 Jackie Exp $$
+ * @version \$id: SmsAutoConfiguration.java v 0.1 2019-05-11 10:03 Jackie Exp $$
  */
 
 @Configuration
 @ConditionalOnBean(annotation = EnabledSmsAutoConfiguration.class)
 @EnableConfigurationProperties(SmsProperties.class)
-public class SmsAutoConfigure {
+public class SmsAutoConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SmsAutoConfigure.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SmsAutoConfiguration.class);
 
     @Configuration
     @ConditionalOnClass({SmsClient.class})
@@ -123,7 +123,7 @@ public class SmsAutoConfigure {
         threadPoolTaskScheduler.schedule(new TimerTask() {
             @Override
             public void run() {
-                SmsAutoConfigure.cleanCache();
+                SmsAutoConfiguration.cleanCache();
             }
         }, new CronTrigger("0 0/5 * * * ?"));
         return threadPoolTaskScheduler;

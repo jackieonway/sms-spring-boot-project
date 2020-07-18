@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.github.jackieonway.sms.autoconfigure.SmsAutoConfigure
+com.github.jackieonway.sms.autoconfigure.SmsAutoConfiguration
