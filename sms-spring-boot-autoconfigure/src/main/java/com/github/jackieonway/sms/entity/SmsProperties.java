@@ -15,39 +15,44 @@ public class SmsProperties {
     @NestedConfigurationProperty
     private SmsTypeEnum smsType = SmsTypeEnum.ALI;
 
-
     /**
-     * 短信应用商服务地址
+     * sms appid
      */
     private String appid;
 
     /**
-     * 域名地址
+     * domain
      */
     private String domain;
     /**
-     * 版本
+     * version
      */
     private String version;
     /**
-     * 短信服务商应用公钥
+     * application access  key
      */
     private String accessKey;
 
     /**
-     * 短信服务商应用私钥
+     *  application security  key
      */
     private String securityKey;
 
     /**
-     * 区域
+     * sms server region
      */
     private String region;
 
     /**
-     * 其余参数
+     * other params
      */
-    private Map<String, String> maps;
+    private Map<String, String> params;
+
+    /**
+     *  limit param
+     */
+    @NestedConfigurationProperty
+    private Limit limit = new Limit();
 
     public SmsTypeEnum getSmsType() {
         return smsType;
@@ -105,12 +110,20 @@ public class SmsProperties {
         this.region = region;
     }
 
-    public Map<String, String> getMaps() {
-        return maps;
+    public Map<String, String> getParams() {
+        return params;
     }
 
-    public void setMaps(Map<String, String> maps) {
-        this.maps = maps;
+    public void setParams(Map<String, String> params) {
+        this.params = params;
+    }
+
+    public Limit getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Limit limit) {
+        this.limit = limit;
     }
 
     @Override
@@ -123,7 +136,8 @@ public class SmsProperties {
                 ", accessKey='" + accessKey + '\'' +
                 ", securityKey='" + securityKey + '\'' +
                 ", region='" + region + '\'' +
-                ", maps=" + maps +
+                ", limit='" + limit + '\'' +
+                ", params=" + params +
                 '}';
     }
 }

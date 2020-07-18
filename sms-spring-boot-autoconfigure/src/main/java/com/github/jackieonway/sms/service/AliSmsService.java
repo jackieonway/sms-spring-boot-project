@@ -7,6 +7,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.AliSmsRequest;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
@@ -14,6 +15,8 @@ import com.github.jackieonway.sms.exception.SmsException;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+
+import java.util.Arrays;
 
 /**
  * 阿里云短信服务
@@ -44,6 +47,7 @@ public class AliSmsService implements SmsService {
             setSingleSmsParams(request, aliSmsRequest, aliSmsRequest.getTemplateId());
             setOtherParams(request, aliSmsRequest);
             try {
+                SmsCacheUtils.cacheSms(Arrays.toString(aliSmsRequest.getPhoneNumbers()),params,smsProperties);
                 return iAcsClient.getCommonResponse(request);
             } catch (ClientException e) {
                 throw new SmsException(e);
@@ -63,6 +67,7 @@ public class AliSmsService implements SmsService {
             setSingleSmsParams(request, aliSmsRequest, templateId);
             setOtherParams(request, aliSmsRequest);
             try {
+                SmsCacheUtils.cacheSms(Arrays.toString(aliSmsRequest.getPhoneNumbers()),params,smsProperties);
                 return iAcsClient.getCommonResponse(request);
             } catch (ClientException e) {
                 throw new SmsException(e);
@@ -81,6 +86,7 @@ public class AliSmsService implements SmsService {
             setMultiSmsParams(request, aliSmsRequest, templateCode);
             setOtherParams(request, aliSmsRequest);
             try {
+                SmsCacheUtils.cacheSms(Arrays.toString(aliSmsRequest.getPhoneNumbers()),params,smsProperties);
                 return iAcsClient.getCommonResponse(request);
             } catch (ClientException e) {
                 throw new SmsException(e);
@@ -100,6 +106,7 @@ public class AliSmsService implements SmsService {
             setMultiSmsParams(request, aliSmsRequest, templateId);
             setOtherParams(request, aliSmsRequest);
             try {
+                SmsCacheUtils.cacheSms(Arrays.toString(aliSmsRequest.getPhoneNumbers()),params,smsProperties);
                 return iAcsClient.getCommonResponse(request);
             } catch (ClientException e) {
                 throw new SmsException(e);

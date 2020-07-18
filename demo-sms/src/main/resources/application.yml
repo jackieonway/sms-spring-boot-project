@@ -6,3 +6,6 @@ spring:
       appid: your appid
       sign: your sign
       region: tencent region
+      limit:
+        enable: true # 允许限制 默认: false
+        limit-time: 300000 # 一次请求限制5分钟 默认: 一分钟

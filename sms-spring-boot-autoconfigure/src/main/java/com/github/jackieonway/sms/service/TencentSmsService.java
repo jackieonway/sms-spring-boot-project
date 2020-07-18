@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.service;
 
+import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.TencentSmsRequest;
@@ -16,6 +17,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,16 +26,16 @@ import java.util.List;
  */
 public class TencentSmsService implements SmsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TencentSmsService.class);
-    private final SmsProperties properties;
+    private final SmsProperties smsProperties;
     private final SmsClient smsClient;
 
     public TencentSmsService(SmsProperties properties) {
-        this.properties = properties;
-        String accessKey = this.properties.getAccessKey();
-        String securityKey = this.properties.getSecurityKey();
+        this.smsProperties = properties;
+        String accessKey = this.smsProperties.getAccessKey();
+        String securityKey = this.smsProperties.getSecurityKey();
         Credential credential = new Credential(accessKey, securityKey);
         ClientProfile profile = new ClientProfile();
-        this.smsClient = new SmsClient(credential, this.properties.getRegion(), profile);
+        this.smsClient = new SmsClient(credential, this.smsProperties.getRegion(), profile);
     }
 
     @Override
@@ -59,6 +61,7 @@ public class TencentSmsService implements SmsService {
     public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
         Assert.notNull(params, "param can not be null");
         if (params instanceof TencentSmsRequest) {
+            SmsCacheUtils.cacheSms(Arrays.toString(((TencentSmsRequest) params).getPhoneNumber()),params,smsProperties);
             return sendBatchTemplateSms(params.getTemplateId(), params);
         }
         throw new SmsException();
@@ -74,6 +77,7 @@ public class TencentSmsService implements SmsService {
             setMultiSmsParams(request, tencentParams, templateId);
             setOtherParams(request, tencentParams);
             try {
+                SmsCacheUtils.cacheSms(Arrays.toString(((TencentSmsRequest) params).getPhoneNumber()),params,smsProperties);
                 return smsClient.SendSms(request);
             } catch (TencentCloudSDKException e) {
                 LOGGER.error("send message error", e);
@@ -85,7 +89,7 @@ public class TencentSmsService implements SmsService {
 
     @NonNull
     private SendSmsRequest getRequest() {
-        String appid = this.properties.getAppid();
+        String appid = this.smsProperties.getAppid();
         SendSmsRequest request = new SendSmsRequest();
         request.setSmsSdkAppid(appid);
         return request;

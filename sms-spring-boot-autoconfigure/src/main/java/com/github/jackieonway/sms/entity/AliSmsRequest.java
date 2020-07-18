@@ -10,6 +10,7 @@ import java.util.Arrays;
  * @see <a href="https://help.aliyun.com/document_detail/101414.html?spm=a2c4g.11186623.2.13.18d73e2c7CYL6S"></a>
  */
 public class AliSmsRequest extends BaseRequest {
+    private static final long serialVersionUID = 7970787199107653507L;
     /**
      * 手机号
      */

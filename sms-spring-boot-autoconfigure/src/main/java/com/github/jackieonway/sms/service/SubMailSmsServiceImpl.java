@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.service;
 
+import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.SubMailRequest;
@@ -25,16 +26,18 @@ import java.util.List;
 public class SubMailSmsServiceImpl implements SmsService {
     private final SubMailClient client;
 
+    private SmsProperties smsProperties;
+
     public SubMailSmsServiceImpl(SmsProperties smsProperties) {
         SubMailProperties properties = new SubMailProperties(smsProperties.getAppid(), smsProperties.getSecurityKey());
-        client = new SubMailClient(properties);
+        this.smsProperties = smsProperties;
+        this.client = new SubMailClient(properties);
     }
 
     @Override
     public Object sendSms(BaseRequest params) throws SmsException {
         Assert.notNull(params, "params can not be null");
         if (params instanceof SubMailRequest) {
-
             SubMailRequest smsParams = (SubMailRequest) params;
             String phoneNumber = smsParams.getPhoneNumber();
             Assert.hasText(phoneNumber, "手机号码不为空");
@@ -44,6 +47,7 @@ public class SubMailSmsServiceImpl implements SmsService {
                 SubMailParams subMailParams = new SubMailParams();
                 subMailParams.setTag(smsParams.getTag());
                 subMailParams.setSignType(smsParams.getSignType().getValue());
+                SmsCacheUtils.cacheSms(phoneNumber,params,smsProperties);
                 return client.sendSms(phoneNumber, content, subMailParams);
             } catch (Exception e) {
                 throw new SmsException(e);
@@ -65,6 +69,7 @@ public class SubMailSmsServiceImpl implements SmsService {
                 SubMailParams subMailParams = new SubMailParams();
                 subMailParams.setTag(smsParams.getTag());
                 subMailParams.setSignType(smsParams.getSignType().getValue());
+                SmsCacheUtils.cacheSms(phoneNumber,params,smsProperties);
                 return client.sendTemplateSms(phoneNumber, templateId, smsParams.getContent(), subMailParams);
             } catch (Exception e) {
                 throw new SmsException(e);
@@ -94,6 +99,7 @@ public class SubMailSmsServiceImpl implements SmsService {
                 SubMailParams subMailParams = new SubMailParams();
                 subMailParams.setTag(smsParams.getTag());
                 subMailParams.setSignType(smsParams.getSignType().getValue());
+                SmsCacheUtils.cacheSms(((SubMailRequest) params).getPhoneNumber(),params,smsProperties);
                 return client.sendBatchSms(content, multiParams, subMailParams);
             } catch (Exception e) {
                 throw new SmsException(e);
@@ -122,6 +128,7 @@ public class SubMailSmsServiceImpl implements SmsService {
                 SubMailParams subMailParams = new SubMailParams();
                 subMailParams.setTag(smsParams.getTag());
                 subMailParams.setSignType(smsParams.getSignType().getValue());
+                SmsCacheUtils.cacheSms(((SubMailRequest) params).getPhoneNumber(),params,smsProperties);
                 return client.sendBatchTemplateSms(templateId, multiParams, subMailParams);
             } catch (Exception e) {
                 throw new SmsException(e);

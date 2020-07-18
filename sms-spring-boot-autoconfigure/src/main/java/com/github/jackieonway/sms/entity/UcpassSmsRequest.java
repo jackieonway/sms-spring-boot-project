@@ -10,6 +10,7 @@ package com.github.jackieonway.sms.entity;
  */
 public class UcpassSmsRequest extends BaseRequest {
 
+    private static final long serialVersionUID = -2326633961827514912L;
     /**
      * 模板中的替换参数，如该模板不存在参数则无需传该参数或者参数为空，
      * 如果有多个参数则需要写在同一个字符串中，以英文逗号分隔 （如：“a,b,c”），

@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.service;
 
+import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.UcpassSmsRequest;
@@ -56,6 +57,7 @@ public class UcpassSmsService implements SmsService {
             String token = smsProperties.getSecurityKey();
             String appid = smsProperties.getAppid();
             String uid = ucPassSmsRequest.getUid();
+            SmsCacheUtils.cacheSms(((UcpassSmsRequest) params).getMobile(),params,smsProperties);
             return jsonReqClient.sendSms(sid, token, appid, templateId, param, mobile, uid);
         }
         throw new SmsException();
@@ -90,6 +92,7 @@ public class UcpassSmsService implements SmsService {
             String sid = smsProperties.getAccessKey();
             String token = smsProperties.getSecurityKey();
             String appid = smsProperties.getAppid();
+            SmsCacheUtils.cacheSms(((UcpassSmsRequest) params).getMobile(),params,smsProperties);
             return jsonReqClient.sendSmsBatch(sid, token, appid, templateId, param, mobile, uid);
         }
         throw new SmsException();

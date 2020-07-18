@@ -11,6 +11,7 @@ import java.util.Arrays;
  */
 public class TencentSmsRequest extends BaseRequest {
 
+    private static final long serialVersionUID = -5554838395436770847L;
     /**
      * 短信签名内容
      */

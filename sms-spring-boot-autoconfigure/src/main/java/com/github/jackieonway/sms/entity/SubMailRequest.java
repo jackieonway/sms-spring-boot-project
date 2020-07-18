@@ -12,6 +12,7 @@ import java.util.Map;
  * @since V1.0 2020/07/09 9:14
  */
 public class SubMailRequest extends BaseRequest {
+    private static final long serialVersionUID = -502542482139218207L;
     /**
      * 手机号
      */
