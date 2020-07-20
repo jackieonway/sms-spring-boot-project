@@ -24,6 +24,7 @@ import java.util.List;
  * @since V1.0 2020/07/09 8:12
  */
 public class SubMailSmsServiceImpl implements SmsService {
+    private static final String PARAMS_CAN_NOT_BE_NULL = "params can not be null";
     private final SubMailClient client;
 
     private SmsProperties smsProperties;
@@ -35,8 +36,8 @@ public class SubMailSmsServiceImpl implements SmsService {
     }
 
     @Override
-    public Object sendSms(BaseRequest params) throws SmsException {
-        Assert.notNull(params, "params can not be null");
+    public Object sendSms(BaseRequest params) {
+        Assert.notNull(params, PARAMS_CAN_NOT_BE_NULL);
         if (params instanceof SubMailRequest) {
             SubMailRequest smsParams = (SubMailRequest) params;
             String phoneNumber = smsParams.getPhoneNumber();
@@ -57,9 +58,9 @@ public class SubMailSmsServiceImpl implements SmsService {
     }
 
     @Override
-    public Object sendTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException {
+    public Object sendTemplateSms(@NonNull String templateId, BaseRequest params) {
         Assert.hasText(templateId, "templateId must not null");
-        Assert.notNull(params, "params can not be null");
+        Assert.notNull(params, PARAMS_CAN_NOT_BE_NULL);
         if (params instanceof SubMailRequest) {
 
             SubMailRequest smsParams = (SubMailRequest) params;
@@ -79,8 +80,8 @@ public class SubMailSmsServiceImpl implements SmsService {
     }
 
     @Override
-    public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
-        Assert.notNull(params, "params can not be null");
+    public Object sendBatchSms(@NonNull BaseRequest params) {
+        Assert.notNull(params, PARAMS_CAN_NOT_BE_NULL);
         if (params instanceof SubMailRequest) {
 
             SubMailRequest smsParams = (SubMailRequest) params;
@@ -110,9 +111,9 @@ public class SubMailSmsServiceImpl implements SmsService {
     }
 
     @Override
-    public Object sendBatchTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException {
+    public Object sendBatchTemplateSms(@NonNull String templateId, BaseRequest params) {
         Assert.hasText(templateId, "templateId must not null");
-        Assert.notNull(params, "params can not be null");
+        Assert.notNull(params, PARAMS_CAN_NOT_BE_NULL);
         if (params instanceof SubMailRequest) {
             SubMailRequest smsParams = (SubMailRequest) params;
             List<SubMailRequest.Multi> multi = smsParams.getMulti();

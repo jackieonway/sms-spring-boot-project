@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Jackie
@@ -97,11 +98,11 @@ public class CacheManager {
         return CACHE_POOL.keySet();
     }
 
-    public static ConcurrentHashMap<Object, Cache> getAllCache(){
+    public static ConcurrentMap<Object, Cache> getAllCache(){
         return CACHE_POOL;
     }
 
-    public static void putAll(ConcurrentHashMap<String, Cache> cacheHashMap){
+    public static void putAll(ConcurrentMap<String, Cache> cacheHashMap){
         if (CollectionUtils.isEmpty(cacheHashMap)){
             return;
         }

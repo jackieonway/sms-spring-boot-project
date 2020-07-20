@@ -10,8 +10,6 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.sms.v20190711.SmsClient;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -25,7 +23,7 @@ import java.util.List;
  * @version \$id: TencentSmsService.java v 0.1 2019-05-17 21:47 Jackie Exp $$
  */
 public class TencentSmsService implements SmsService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TencentSmsService.class);
+    private static final String PARAM_CAN_NOT_BE_NULL = "param can not be null";
     private final SmsProperties smsProperties;
     private final SmsClient smsClient;
 
@@ -39,8 +37,8 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendSms(@NonNull BaseRequest params) throws SmsException {
-        Assert.notNull(params, "param can not be null");
+    public Object sendSms(@NonNull BaseRequest params) {
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof TencentSmsRequest) {
             return sendBatchSms(params);
         }
@@ -48,9 +46,9 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) throws SmsException {
+    public Object sendTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) {
         Assert.notNull(templateId, "templateId can not be null");
-        Assert.notNull(params, "param can not be null");
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof TencentSmsRequest) {
             sendBatchTemplateSms(templateId, params);
         }
@@ -58,8 +56,8 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
-        Assert.notNull(params, "param can not be null");
+    public Object sendBatchSms(@NonNull BaseRequest params) {
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof TencentSmsRequest) {
             SmsCacheUtils.cacheSms(Arrays.toString(((TencentSmsRequest) params).getPhoneNumber()),params,smsProperties);
             return sendBatchTemplateSms(params.getTemplateId(), params);
@@ -68,9 +66,9 @@ public class TencentSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) throws SmsException {
+    public Object sendBatchTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) {
         Assert.notNull(templateId, "templateId can not be null");
-        Assert.notNull(params, "param can not be null");
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof TencentSmsRequest) {
             SendSmsRequest request = getRequest();
             TencentSmsRequest tencentParams = (TencentSmsRequest) params;
@@ -80,7 +78,6 @@ public class TencentSmsService implements SmsService {
                 SmsCacheUtils.cacheSms(Arrays.toString(((TencentSmsRequest) params).getPhoneNumber()),params,smsProperties);
                 return smsClient.SendSms(request);
             } catch (TencentCloudSDKException e) {
-                LOGGER.error("send message error", e);
                 throw new SmsException(e);
             }
         }

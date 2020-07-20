@@ -1,7 +1,6 @@
 package com.github.jackieonway.sms.service;
 
 import com.github.jackieonway.sms.entity.BaseRequest;
-import com.github.jackieonway.sms.exception.SmsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
@@ -23,7 +22,7 @@ public interface SmsService {
      * @param params 根据对应的短信服务商所需信息填写
      * @return Object
      */
-    Object sendSms(BaseRequest params) throws SmsException;
+    Object sendSms(BaseRequest params);
 
     /**
      * 单个发送模板短信
@@ -32,7 +31,7 @@ public interface SmsService {
      * @param params     根据对应的短信服务商所需信息填写
      * @return Object
      */
-    Object sendTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException;
+    Object sendTemplateSms(@NonNull String templateId, BaseRequest params);
 
     /**
      * 批量发送短信
@@ -40,7 +39,7 @@ public interface SmsService {
      * @param params 根据对应的短信服务商所需信息填写
      * @return Object
      */
-    Object sendBatchSms(@NonNull BaseRequest params) throws SmsException;
+    Object sendBatchSms(@NonNull BaseRequest params);
 
     /**
      * 批量发送模板短信
@@ -49,7 +48,7 @@ public interface SmsService {
      * @param params     根据对应的短信服务商所需信息填写
      * @return Object
      */
-    Object sendBatchTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException;
+    Object sendBatchTemplateSms(@NonNull String templateId, BaseRequest params);
 
     /**
      * 异步单个发送模板短信
@@ -58,7 +57,7 @@ public interface SmsService {
      * @param params     根据对应的短信服务商所需信息填写
      */
     @Async(value = "executorService")
-    default void asyncSendTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException {
+    default void asyncSendTemplateSms(@NonNull String templateId, BaseRequest params) {
         Object sendTemplateSms = this.sendTemplateSms(templateId, params);
         log.info("Async Thread [{}] send sms , request templateId:[{}], " +
                 "request prams:[{}], result:[{}]", Thread.currentThread().getName(), templateId, params,
@@ -72,7 +71,7 @@ public interface SmsService {
      * @param params     根据对应的短信服务商所需信息填写
      */
     @Async(value = "executorService")
-    default void asnycSendBatchTemplateSms(@NonNull String templateId, BaseRequest params) throws SmsException {
+    default void asnycSendBatchTemplateSms(@NonNull String templateId, BaseRequest params) {
         Object sendTemplateSms = this.sendTemplateSms(templateId, params);
         log.info("Async Thread [{}] send batch sms , request templateId:[{}], " +
                 "request prams:[{}], result:[{}]", Thread.currentThread().getName(), templateId, params,

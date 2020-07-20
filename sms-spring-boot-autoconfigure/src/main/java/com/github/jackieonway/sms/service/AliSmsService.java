@@ -26,6 +26,9 @@ import java.util.Arrays;
  * @see <a href="https://help.aliyun.com/document_detail/102715.html?spm=5176.8195934.1283918.7.48aa6a7d88zLMi#concept-t4w-pcs-ggb"></a>
  */
 public class AliSmsService implements SmsService {
+    private static final String PHONE_NUMBERS = "PhoneNumbers";
+    private static final String PARAM_CAN_NOT_BE_NULL = "param can not be null";
+    private static final String SEND_SMS = "SendSms";
     private final IAcsClient iAcsClient;
 
     private final SmsProperties smsProperties;
@@ -38,10 +41,10 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendSms(@NonNull BaseRequest params) throws SmsException {
+    public Object sendSms(@NonNull BaseRequest params) {
         Assert.notNull(params, "param  can not be null");
         CommonRequest request = setCommonRequest();
-        request.setSysAction("SendSms");
+        request.setSysAction(SEND_SMS);
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setSingleSmsParams(request, aliSmsRequest, aliSmsRequest.getTemplateId());
@@ -57,11 +60,11 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) throws SmsException {
+    public Object sendTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) {
         Assert.notNull(templateId, "templateId can not be null");
-        Assert.notNull(params, "param can not be null");
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         CommonRequest request = setCommonRequest();
-        request.setSysAction("SendSms");
+        request.setSysAction(SEND_SMS);
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
             setSingleSmsParams(request, aliSmsRequest, templateId);
@@ -77,8 +80,8 @@ public class AliSmsService implements SmsService {
     }
 
     @Override
-    public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
-        Assert.notNull(params, "param can not be null");
+    public Object sendBatchSms(@NonNull BaseRequest params) {
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         CommonRequest request = setCommonRequest();
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
@@ -97,9 +100,9 @@ public class AliSmsService implements SmsService {
 
 
     @Override
-    public Object sendBatchTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) throws SmsException {
+    public Object sendBatchTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) {
         Assert.notNull(templateId, "templateId can not be null");
-        Assert.notNull(params, "param can not be null");
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         CommonRequest request = setCommonRequest();
         if (params instanceof AliSmsRequest) {
             AliSmsRequest aliSmsRequest = (AliSmsRequest) params;
@@ -134,14 +137,14 @@ public class AliSmsService implements SmsService {
         }
         if (aliSmsRequest.getIsSendBatchSms()) {
             request.setSysAction("SendBatchSms");
-            request.putQueryParameter("PhoneNumbers", JSON.toJSONString(phoneNumbers));
+            request.putQueryParameter(PHONE_NUMBERS, JSON.toJSONString(phoneNumbers));
         } else {
-            request.setSysAction("SendSms");
+            request.setSysAction(SEND_SMS);
             StringBuilder stringBuilder = new StringBuilder();
             for (String phoneNumber : phoneNumbers) {
                 stringBuilder.append(phoneNumber).append(",");
             }
-            request.putQueryParameter("PhoneNumbers", stringBuilder.substring(0, stringBuilder.length() - 1));
+            request.putQueryParameter(PHONE_NUMBERS, stringBuilder.substring(0, stringBuilder.length() - 1));
         }
     }
 
@@ -154,7 +157,7 @@ public class AliSmsService implements SmsService {
         if (phoneNumbers == null) {
             throw new IllegalArgumentException("param phoneNumbers can not be null");
         }
-        request.putQueryParameter("PhoneNumbers", phoneNumbers[0]);
+        request.putQueryParameter(PHONE_NUMBERS, phoneNumbers[0]);
     }
 
     private void setOtherParams(CommonRequest request, AliSmsRequest aliSmsRequest) {

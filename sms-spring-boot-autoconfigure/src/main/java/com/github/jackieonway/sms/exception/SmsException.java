@@ -6,6 +6,7 @@ package com.github.jackieonway.sms.exception;
  */
 public class SmsException extends RuntimeException {
     private static final String SYS_TYPE_CONFIG_ERROR_MSG = "短信服务商信息配置错误";
+    private static final long serialVersionUID = 3007883817267430838L;
 
     public SmsException() {
         super(SYS_TYPE_CONFIG_ERROR_MSG);

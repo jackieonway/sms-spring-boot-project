@@ -2,6 +2,7 @@ package com.github.jackieonway.sms.entity;
 
 import com.github.jackieonway.sms.submail.utils.SignTypeEnum;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -78,7 +79,8 @@ public class SubMailRequest extends BaseRequest {
     /**
      * 用于批量
      */
-    public static class Multi {
+    public static class Multi implements Serializable {
+        private static final long serialVersionUID = 3062311667076951096L;
         /**
          * 手机号
          */

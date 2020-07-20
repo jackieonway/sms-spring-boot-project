@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
  * @version \$id: UcpassSmsService.java v 0.1 2019-7-15 14:01 bigbearLoveTingting Exp $$
  */
 public class UcpassSmsService implements SmsService {
+    private static final String PARAM_CAN_NOT_BE_NULL = "param can not be null";
     private final JsonReqClient jsonReqClient;
 
     private final SmsProperties smsProperties;
@@ -36,17 +37,16 @@ public class UcpassSmsService implements SmsService {
      * @throws SmsException 异常
      * @see #sendTemplateSms(String, BaseRequest)
      */
-    @Deprecated
     @Override
-    public Object sendSms(@NonNull BaseRequest params) throws SmsException {
-        Assert.notNull(params, "param can not be null");
+    public Object sendSms(@NonNull BaseRequest params) {
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         return sendTemplateSms(params.getTemplateId(), params);
     }
 
     @Override
-    public Object sendTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) throws SmsException {
+    public Object sendTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) {
         Assert.notNull(templateId, "templateId can not be null");
-        Assert.notNull(params, "param can not be null");
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof UcpassSmsRequest) {
             UcpassSmsRequest ucPassSmsRequest = (UcpassSmsRequest) params;
             // 发送的手机号
@@ -71,17 +71,16 @@ public class UcpassSmsService implements SmsService {
      * @throws SmsException 异常
      * @see #sendBatchTemplateSms(String, BaseRequest)
      */
-    @Deprecated
     @Override
-    public Object sendBatchSms(@NonNull BaseRequest params) throws SmsException {
-        Assert.notNull(params, "param can not be null");
+    public Object sendBatchSms(@NonNull BaseRequest params) {
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         return sendBatchTemplateSms(params.getTemplateId(), params);
     }
 
     @Override
-    public Object sendBatchTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) throws SmsException {
+    public Object sendBatchTemplateSms(@NonNull String templateId, @NonNull BaseRequest params) {
         Assert.notNull(templateId, "templateId can not be null");
-        Assert.notNull(params, "param can not be null");
+        Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof UcpassSmsRequest) {
             UcpassSmsRequest ucPassSmsRequest = (UcpassSmsRequest) params;
             // 发送的手机号

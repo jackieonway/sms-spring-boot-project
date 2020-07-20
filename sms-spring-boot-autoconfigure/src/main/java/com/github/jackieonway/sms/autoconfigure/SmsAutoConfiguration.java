@@ -27,7 +27,7 @@ import java.io.*;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TimerTask;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Jackie
@@ -170,7 +170,7 @@ public class SmsAutoConfiguration {
             String property = System.getProperty("java.io.tmpdir");
             String path = property + File.separator + SERIALAZE_FILE_NAME;
             ois = new ObjectInputStream(new FileInputStream(new File(path)));
-            ConcurrentHashMap<String, Cache> cacheHashMap = (ConcurrentHashMap<String, Cache>)ois.readObject();
+            ConcurrentMap<String, Cache> cacheHashMap = (ConcurrentMap<String, Cache>)ois.readObject();
             CacheManager.putAll(cacheHashMap);
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.error("deserialaze cache error, reason: [{}]",e.getMessage());
