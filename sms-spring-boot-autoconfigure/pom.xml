@@ -59,5 +59,10 @@
             <version>0.0.3-SNAPSHOT</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.github.jackieonway.sms</groupId>
+            <artifactId>sms-core</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

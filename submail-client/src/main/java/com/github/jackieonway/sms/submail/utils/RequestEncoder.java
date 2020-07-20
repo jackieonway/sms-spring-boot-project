@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.submail.utils;
 
+import com.github.jackieonway.sms.core.exception.SmsException;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -42,7 +43,7 @@ public class RequestEncoder {
             messageDigest.update(str.getBytes(StandardCharsets.UTF_8));
             return getFormattedText(messageDigest.digest());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SmsException(e.getMessage(),e);
         }
 
     }
@@ -72,7 +73,7 @@ public class RequestEncoder {
      */
     public static String formatRequest(Map<String, Object> data) {
         //keySet获取键集
-        List<String> keys = new ArrayList<String>(data.keySet());
+        List<String> keys = new ArrayList<>(data.keySet());
         //对键集进行排序
         Collections.sort(keys);
 

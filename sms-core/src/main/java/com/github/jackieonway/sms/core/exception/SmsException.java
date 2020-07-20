@@ -1,4 +1,4 @@
-package com.github.jackieonway.sms.exception;
+package com.github.jackieonway.sms.core.exception;
 
 /**
  * @author Jackie

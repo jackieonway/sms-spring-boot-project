@@ -1,7 +1,9 @@
-package com.github.jackieonway.sms.submail.utils;
+package com.github.jackieonway.sms.core.utils;
 
 
 import okhttp3.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -24,6 +26,8 @@ public class OkHttpClientUtil {
     private static final byte[] LOCKER = new byte[0];
     private static OkHttpClientUtil mInstance;
     private OkHttpClient okHttpClient;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(OkHttpClientUtil.class);
 
     private OkHttpClientUtil() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
@@ -68,7 +72,7 @@ public class OkHttpClientUtil {
         try {
             response = call.execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("sms http utils error", e);
         }
         return response;
     }
@@ -93,7 +97,7 @@ public class OkHttpClientUtil {
         try {
             response = call.execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("sms http utils error", e);
         }
         return response;
     }
@@ -182,7 +186,7 @@ public class OkHttpClientUtil {
             Iterator<String> iterator = bodyParams.keySet().iterator();
             String key = "";
             while (iterator.hasNext()) {
-                key = iterator.next().toString();
+                key = iterator.next();
                 formEncodingBuilder.add(key, bodyParams.get(key));
             }
         }

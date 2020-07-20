@@ -1,4 +1,4 @@
-package com.github.jackieonway.sms.submail.utils;
+package com.github.jackieonway.sms.core.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

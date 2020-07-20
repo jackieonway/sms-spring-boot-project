@@ -1,11 +1,11 @@
 package com.github.jackieonway.sms.submail.client;
 
-import com.github.jackieonway.sms.submail.exception.SubMailException;
+import com.github.jackieonway.sms.core.exception.SmsException;
 import com.github.jackieonway.sms.submail.model.MultiParams;
 import com.github.jackieonway.sms.submail.model.SubMailParams;
 import com.github.jackieonway.sms.submail.model.SubMailProperties;
-import com.github.jackieonway.sms.submail.utils.GsonUtils;
-import com.github.jackieonway.sms.submail.utils.OkHttpClientUtil;
+import com.github.jackieonway.sms.core.utils.GsonUtils;
+import com.github.jackieonway.sms.core.utils.OkHttpClientUtil;
 import com.github.jackieonway.sms.submail.utils.RequestEncoder;
 import com.github.jackieonway.sms.submail.utils.SignTypeEnum;
 import okhttp3.Response;
@@ -54,7 +54,7 @@ public class SubMailClient {
      * @param params  subMail request other request params(其余参数)
      * @return result
      */
-    public String sendSms(@NonNull String to, @NonNull String content, SubMailParams params) throws SubMailException {
+    public String sendSms(@NonNull String to, @NonNull String content, SubMailParams params) {
         if (params == null) {
             params = new SubMailParams();
         }
@@ -138,8 +138,7 @@ public class SubMailClient {
             LOGGER.info("send sub mail result {}", result);
             return result;
         } catch (Exception e) {
-            LOGGER.error("send subMail error", e);
-            throw new SubMailException("send subMail Error", e);
+            throw new SmsException("send subMail Error", e);
         }
     }
 
@@ -186,7 +185,6 @@ public class SubMailClient {
             SubMailClient.Timestamp timestamp = GsonUtils.gsonToBean(json, SubMailClient.Timestamp.class);
             return timestamp.getTimestamp();
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.error("获取时间戳失败", e);
         }
         return json;

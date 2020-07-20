@@ -1,17 +1,17 @@
 package com.github.jackieonway.sms.service;
 
-import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.github.jackieonway.sms.core.utils.GsonUtils;
 import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.AliSmsRequest;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
-import com.github.jackieonway.sms.exception.SmsException;
+import com.github.jackieonway.sms.core.exception.SmsException;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -137,7 +137,7 @@ public class AliSmsService implements SmsService {
         }
         if (aliSmsRequest.getIsSendBatchSms()) {
             request.setSysAction("SendBatchSms");
-            request.putQueryParameter(PHONE_NUMBERS, JSON.toJSONString(phoneNumbers));
+            request.putQueryParameter(PHONE_NUMBERS, GsonUtils.gson2String(phoneNumbers));
         } else {
             request.setSysAction(SEND_SMS);
             StringBuilder stringBuilder = new StringBuilder();

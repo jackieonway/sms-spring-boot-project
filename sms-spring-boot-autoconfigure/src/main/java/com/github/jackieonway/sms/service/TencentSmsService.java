@@ -4,7 +4,7 @@ import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.TencentSmsRequest;
-import com.github.jackieonway.sms.exception.SmsException;
+import com.github.jackieonway.sms.core.exception.SmsException;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;

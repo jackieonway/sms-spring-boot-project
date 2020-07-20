@@ -2,9 +2,9 @@ package com.github.jackieonway.sms.ucpass.entity;
 
 /**
  * @author Jackie
- * @version \$id: SmsProperties.java v 0.1 2019-05-11 10:03 Jackie Exp $$
+ * @version \$id: UcpassSmsProperties.java v 0.1 2019-05-11 10:03 Jackie Exp $$
  */
-public class SmsProperties {
+public class UcpassSmsProperties {
 
     /**
      *  云之讯服务地址

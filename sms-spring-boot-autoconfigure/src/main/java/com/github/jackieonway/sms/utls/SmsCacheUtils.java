@@ -10,7 +10,7 @@ import com.github.jackieonway.sms.entity.Limit;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.cache.Cache;
 import com.github.jackieonway.sms.entity.cache.CacheBuilder;
-import com.github.jackieonway.sms.exception.SmsException;
+import com.github.jackieonway.sms.core.exception.SmsException;
 
 import java.util.Objects;
 

@@ -4,7 +4,7 @@ import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.SubMailRequest;
-import com.github.jackieonway.sms.exception.SmsException;
+import com.github.jackieonway.sms.core.exception.SmsException;
 import com.github.jackieonway.sms.submail.client.SubMailClient;
 import com.github.jackieonway.sms.submail.model.MultiParams;
 import com.github.jackieonway.sms.submail.model.SubMailParams;

@@ -1,10 +1,11 @@
 package com.github.jackieonway.sms.service;
 
+import com.github.jackieonway.sms.ucpass.entity.UcpassSmsProperties;
 import com.github.jackieonway.sms.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.entity.BaseRequest;
 import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.UcpassSmsRequest;
-import com.github.jackieonway.sms.exception.SmsException;
+import com.github.jackieonway.sms.core.exception.SmsException;
 import com.github.jackieonway.sms.ucpass.client.JsonReqClient;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
@@ -22,11 +23,11 @@ public class UcpassSmsService implements SmsService {
     private final SmsProperties smsProperties;
 
     public UcpassSmsService(SmsProperties smsProperties) {
-        com.github.jackieonway.sms.ucpass.entity.SmsProperties smsProperties1
-                = new com.github.jackieonway.sms.ucpass.entity.SmsProperties();
-        smsProperties1.setRestServer(smsProperties.getDomain());
+        UcpassSmsProperties ucpassSmsProperties
+                = new UcpassSmsProperties();
+        ucpassSmsProperties.setRestServer(smsProperties.getDomain());
         this.smsProperties = smsProperties;
-        this.jsonReqClient = new JsonReqClient(smsProperties1);
+        this.jsonReqClient = new JsonReqClient(ucpassSmsProperties);
     }
 
     /**
