@@ -34,12 +34,14 @@ public class SmsCacheUtils {
 
     public static void putCache(String phoneNumber, BaseRequest baseRequest, int timeout){
         if (CacheManager.isExistKey(phoneNumber) && CacheManager.isTimeout(phoneNumber)){
+            CacheManager.remove(phoneNumber);
             CacheManager.putCacheIfNotFound(phoneNumber, baseRequest, timeout);
+            return;
         }
         Cache cache = CacheManager.get(phoneNumber);
         if (Objects.nonNull(cache)) {
-            cache.setLastModifyTime(System.currentTimeMillis());
             CacheManager.put(phoneNumber, cache);
+            return;
         }
         CacheManager.put(phoneNumber,
                 CacheBuilder.builder().data(baseRequest).timeout(timeout).build());

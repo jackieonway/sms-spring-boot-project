@@ -80,7 +80,7 @@ public class CacheManager {
     }
 
     public static boolean isTimeout(@NotNull Object key){
-        if (!isExistKey(key)){
+        if (isNotExistKey(key)){
             return Boolean.TRUE;
         }
         Cache cache = CACHE_POOL.get(key);
@@ -106,5 +106,9 @@ public class CacheManager {
             return;
         }
         CACHE_POOL.putAll(cacheHashMap);
+    }
+
+    public static int size(){
+        return CACHE_POOL.size();
     }
 }
