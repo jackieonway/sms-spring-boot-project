@@ -177,30 +177,43 @@ public class HelloController {
      *  单个发送短信
      * @param params 根据对应的短信服务商所需信息填写
      */
-    public Object sendSms(Integer type,Object params) throws SmsException;
+    public Object sendSms(Integer type,Object params);
 
     /**
      * 单个发送模板短信
      * @param tempalteId 短信模板id
      * @param params 根据对应的短信服务商所需信息填写
      */
-    public Object sendTemplateSms(String tempalteId, Object params) throws SmsException;
+    public Object sendTemplateSms(String tempalteId, Object params);
 
     /**
      *  批量发送短信
      * @param params 根据对应的短信服务商所需信息填写
      */
-    public Object sendBatchSms(int type,Object params) throws SmsException;
+    public Object sendBatchSms(int type,Object params);
 
     /**
      * 批量发送模板短信
      * @param tempalteId 短信模板id
      * @param params 根据对应的短信服务商所需信息填写
      */
-    public Object sendBatchTemplateSms(String tempalteId, Object params) throws SmsException;
+    public Object sendBatchTemplateSms(String tempalteId, Object params);
+
+    /**
+     * 异步发送模板短信
+     * @param tempalteId 短信模板id
+     * @param params 根据对应的短信服务商所需信息填写
+     */
+    void asyncSendTemplateSms(@NonNull String templateId, BaseRequest params);
+
+    /**
+     * 异步批量发送模板短信
+     * @param tempalteId 短信模板id
+     * @param params 根据对应的短信服务商所需信息填写
+     */
+    void asnycSendBatchTemplateSms(@NonNull String templateId, BaseRequest params);     
 
 ```
-该接口提供了单个和群发短信与模板短信，注意目前只提供了同步发送方法，异步发送方法，请结合线程池进行。
 
 ## 结语
 
@@ -219,7 +232,7 @@ public class HelloController {
 <dependency>
     <groupId>com.github.jackieonway.sms</groupId>
     <artifactId>sms-spring-boot-starter</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <!-- 腾讯短信依赖 -->
     <!--<dependency>
         <groupId>com.github.qcloudsms</groupId>
@@ -238,13 +251,13 @@ public class HelloController {
     <!--<dependency>
         <groupId>com.github.jackieonway.sms</groupId>
         <artifactId>ucpass-client</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </dependency>-->
    <!-- 赛邮短信依赖 -->
    <!--<dependency>
          <groupId>com.github.jackieonway.sms</groupId>
          <artifactId>submail-client</artifactId>
-         <version>0.0.2</version>
+         <version>0.0.3-SNAPSHOT</version>
     </dependency>-->
 </dependency>
  ```
