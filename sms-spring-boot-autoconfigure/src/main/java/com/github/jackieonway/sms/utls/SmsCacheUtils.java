@@ -11,7 +11,6 @@ import com.github.jackieonway.sms.entity.SmsProperties;
 import com.github.jackieonway.sms.entity.cache.Cache;
 import com.github.jackieonway.sms.entity.cache.CacheBuilder;
 import com.github.jackieonway.sms.core.exception.SmsException;
-import com.github.jackieonway.sms.entity.cache.CleanStrategy;
 
 import java.util.Objects;
 
