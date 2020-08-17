@@ -1,5 +1,6 @@
 package com.github.jackieonway.sms.entity;
 
+import com.github.jackieonway.sms.entity.cache.CleanStrategy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -53,6 +54,8 @@ public class SmsProperties {
      */
     @NestedConfigurationProperty
     private Limit limit = new Limit();
+
+    private CleanStrategy cleanStrategy= CleanStrategy.FIRST;
 
     public SmsTypeEnum getSmsType() {
         return smsType;
@@ -126,6 +129,14 @@ public class SmsProperties {
         this.limit = limit;
     }
 
+    public CleanStrategy getCleanStrategy() {
+        return cleanStrategy;
+    }
+
+    public void setCleanStrategy(CleanStrategy cleanStrategy) {
+        this.cleanStrategy = cleanStrategy;
+    }
+
     @Override
     public String toString() {
         return "SmsProperties{" +
@@ -136,8 +147,9 @@ public class SmsProperties {
                 ", accessKey='" + accessKey + '\'' +
                 ", securityKey='" + securityKey + '\'' +
                 ", region='" + region + '\'' +
-                ", limit='" + limit + '\'' +
                 ", params=" + params +
+                ", limit=" + limit +
+                ", cleanStrategy=" + cleanStrategy +
                 '}';
     }
 }

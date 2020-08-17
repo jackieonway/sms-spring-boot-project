@@ -7,10 +7,11 @@ package com.github.jackieonway.sms.cache;
 import com.github.jackieonway.sms.entity.cache.Cache;
 import com.github.jackieonway.sms.entity.cache.CacheBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -19,6 +20,8 @@ import java.util.concurrent.ConcurrentMap;
  * @version $id: CacheManager.java v 0.1 2020-07-17 16:45 Jackie Exp $$
  */
 public class CacheManager {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CacheManager.class);
 
     private CacheManager() {
     }
@@ -112,4 +115,54 @@ public class CacheManager {
     public static int size(){
         return CACHE_POOL.size();
     }
+
+    public static boolean isMax(){
+        return size() >= 10000;
+    }
+
+    public static synchronized void removeFirst(){
+        Iterator<Map.Entry<Object, Cache>> iterator = CACHE_POOL.entrySet().iterator();
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("sms cache pool remove cache [{}]",iterator.next().getKey());
+        }
+        iterator.remove();
+
+    }
+
+    public static synchronized void removeLeastTimeRemaining(){
+        long currentTimeMillis = System.currentTimeMillis();
+        Iterator<Map.Entry<Object, Cache>> iterator = CACHE_POOL.entrySet().iterator();
+        List<Map.Entry<Object, Cache>> cacheList = new ArrayList<>();
+        while (iterator.hasNext()){
+            Map.Entry<Object, Cache> next = iterator.next();
+            Cache value = next.getValue();
+            if (value.getTimeout() == -1){
+                continue;
+            }
+            if (CollectionUtils.isEmpty(cacheList)){
+                cacheList.add(next);
+            }
+            Cache oldCache = cacheList.get(0).getValue();
+            long timeoutOld = oldCache.getTimeout() - (currentTimeMillis - oldCache.getLastModifyTime());
+            long timeoutNew = value.getTimeout() - (currentTimeMillis - value.getLastModifyTime());
+
+            if (timeoutNew < timeoutOld){
+                cacheList.clear();
+                cacheList.add(next);
+            }else if (timeoutNew == timeoutOld){
+                cacheList.add(next);
+            }
+        }
+        if (!CollectionUtils.isEmpty(cacheList)){
+            cacheList.forEach(m -> {
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug("sms cache pool remove cache [{}]",m.getKey());
+                }
+                CACHE_POOL.remove(m.getKey());
+            });
+        }
+
+    }
+
 }
+

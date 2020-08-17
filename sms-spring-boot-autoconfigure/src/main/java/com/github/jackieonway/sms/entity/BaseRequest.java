@@ -10,6 +10,8 @@ public class BaseRequest implements Serializable {
     private static final long serialVersionUID = -3202828912350900963L;
     private String templateId;
 
+    private Limit limit;
+
     public String getTemplateId() {
         return templateId;
     }
@@ -18,10 +20,19 @@ public class BaseRequest implements Serializable {
         this.templateId = templateId;
     }
 
+    public Limit getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Limit limit) {
+        this.limit = limit;
+    }
+
     @Override
     public String toString() {
         return "BaseRequest{" +
                 "templateId='" + templateId + '\'' +
+                ", limit=" + limit +
                 '}';
     }
 }
