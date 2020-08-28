@@ -50,7 +50,7 @@ public class TencentSmsService implements SmsService {
         Assert.notNull(templateId, "templateId can not be null");
         Assert.notNull(params, PARAM_CAN_NOT_BE_NULL);
         if (params instanceof TencentSmsRequest) {
-            sendBatchTemplateSms(templateId, params);
+            return sendBatchTemplateSms(templateId, params);
         }
         throw new SmsException();
     }
