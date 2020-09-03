@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  * @author Jackie
- * @version $id: SmsCacheUtils.java v 0.1 2020-07-18 10:43 Jackie Exp $$
+ * @version $id: SmsCacheUtils.java v 0.0.3 2020-07-18 10:43 Jackie Exp $$
  */
 public class SmsCacheUtils {
 
@@ -28,9 +28,7 @@ public class SmsCacheUtils {
      * @param limit configuration
      * @return  timeout
      * @author  Jackie
-     * @date  2020/8/14 17:06
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#getTimeout
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     public static int getTimeout(Limit limit){
@@ -42,9 +40,7 @@ public class SmsCacheUtils {
      * @param limit configuration
      * @return  enable cache config
      * @author  Jackie
-     * @date  2020/8/14 17:07
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#enableCache
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     public static boolean enableCache(Limit limit){
@@ -57,9 +53,7 @@ public class SmsCacheUtils {
      * @param baseRequest cache value
      * @param timeout timeout
      * @author  Jackie
-     * @date  2020/8/14 17:08
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#putCache
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     public static void putCache(String phoneNumber, BaseRequest baseRequest, int timeout){
@@ -81,11 +75,8 @@ public class SmsCacheUtils {
      * put request into  cache
      * @param phoneNumber phone number cache key
      * @param baseRequest cache value
-     * @return
      * @author  Jackie
-     * @date  2020/8/14 17:09
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#putCache
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     public static void putCache(String phoneNumber, BaseRequest baseRequest){
@@ -97,9 +88,7 @@ public class SmsCacheUtils {
      * @param phoneNumber cache key
      * @return  cache value
      * @author  Jackie
-     * @date  2020/8/14 17:10
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#getCache
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     public static Object getCache(String phoneNumber){
@@ -116,9 +105,7 @@ public class SmsCacheUtils {
      * @param baseRequest sms content
      * @param smsProperties global sms configuration
      * @author  Jackie
-     * @date  2020/8/14 17:10
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#cacheSms
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     public static void cacheSms(String phoneNumber, BaseRequest baseRequest, SmsProperties smsProperties){
@@ -154,9 +141,7 @@ public class SmsCacheUtils {
      * @param baseRequest cache value
      * @param limit limit configuration
      * @author  Jackie
-     * @date  2020/8/14 17:12
-     * @since 1.0
-     * @method-name com.github.jackieonway.sms.utls.SmsCacheUtils#putCache
+     * @since 0.0.3
      * @see SmsCacheUtils
      */
     private static void putCache(String phoneNumber, BaseRequest baseRequest, Limit limit) {

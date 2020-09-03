@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author Jackie
- * @version $id: Cache.java v 0.1 2020-07-17 16:00 Jackie Exp $$
+ * @version $id: Cache.java v 0.0.3 2020-07-17 16:00 Jackie Exp $$
  */
 public class Cache implements Serializable {
 

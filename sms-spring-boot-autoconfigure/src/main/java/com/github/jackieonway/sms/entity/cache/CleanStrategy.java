@@ -6,7 +6,7 @@ package com.github.jackieonway.sms.entity.cache;
 
 /**
  * @author Jackie
- * @version $id: CleanStrategy.java v 0.1 2020-08-17 8:58 Jackie Exp $$
+ * @version $id: CleanStrategy.java v 0.0.3 2020-08-17 8:58 Jackie Exp $$
  */
 public enum  CleanStrategy {
 
