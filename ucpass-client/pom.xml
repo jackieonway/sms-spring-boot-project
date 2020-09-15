@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.github.jackieonway.sms</groupId>
         <artifactId>sms-spring-boot-parent</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>ucpass-client</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <name>ucpass-client</name>
     <packaging>jar</packaging>
     <description>Ucpass project for Spring Boot</description>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
             <artifactId>sms-core</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
+            <version>0.0.3</version>
         </dependency>
     </dependencies>
 </project>

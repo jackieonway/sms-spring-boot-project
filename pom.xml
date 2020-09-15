@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.github.jackieonway.sms</groupId>
     <artifactId>sms-spring-boot-parent</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <name>sms-spring-boot-parent</name>
     <packaging>pom</packaging>
     <properties>

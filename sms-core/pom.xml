@@ -5,12 +5,12 @@
     <parent>
         <artifactId>sms-spring-boot-parent</artifactId>
         <groupId>com.github.jackieonway.sms</groupId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sms-core</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
     <description>sms core project for Spring Boot</description>
 
