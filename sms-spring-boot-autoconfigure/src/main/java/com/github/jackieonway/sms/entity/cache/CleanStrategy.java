@@ -10,6 +10,12 @@ package com.github.jackieonway.sms.entity.cache;
  */
 public enum  CleanStrategy {
 
+    /**
+     * remove the first cache
+     */
     FIRST,
+    /**
+     * remove the less time‘s cache
+     */
     LESS_TIME
 }

@@ -112,12 +112,10 @@ public class SmsCacheUtils {
 
         if (CacheManager.isMax()){
             switch (smsProperties.getCleanStrategy()){
-                case FIRST :
-                    CacheManager.removeFirst();
-                    break;
                 case LESS_TIME:
                     CacheManager.removeLeastTimeRemaining();
                     break;
+                case FIRST :
                 default:
                     CacheManager.removeFirst();
             }

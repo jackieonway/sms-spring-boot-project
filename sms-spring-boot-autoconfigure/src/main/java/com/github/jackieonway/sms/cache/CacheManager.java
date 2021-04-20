@@ -117,7 +117,7 @@ public class CacheManager {
     }
 
     public static boolean isMax(){
-        return size() >= 10000;
+        return size() >= 16384;
     }
 
     public static synchronized void removeFirst(){

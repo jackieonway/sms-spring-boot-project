@@ -26,8 +26,8 @@ import org.springframework.util.CollectionUtils;
 import java.io.*;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TimerTask;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author Jackie
@@ -96,36 +96,33 @@ public class SmsAutoConfiguration {
         }
     }
 
-    private static final int MAX_POOL_SIZE = 60;
+    private static final int CORE_POOL_SIZE = (int)(Runtime.getRuntime().availableProcessors() / 0.1);
 
-    private static final int CORE_POOL_SIZE = 30;
+    private static final int MAX_POOL_SIZE = CORE_POOL_SIZE << 1;
 
     private static final int SCHEDULER_POOL_SIZE = 5;
 
-    private static final String SERIALAZE_FILE_NAME = "serializeCache";
+    private static final String SERIALIZE_FILE_NAME = "serializeCache";
 
     @Bean
-    public AsyncTaskExecutor executorService(){
+    public AsyncTaskExecutor smsAsyncTaskExecutor(){
         ThreadPoolTaskExecutor asyncTaskExecutor = new ThreadPoolTaskExecutor();
         asyncTaskExecutor.setMaxPoolSize(MAX_POOL_SIZE);
         asyncTaskExecutor.setCorePoolSize(CORE_POOL_SIZE);
         asyncTaskExecutor.setThreadNamePrefix("sms-thread-");
+        asyncTaskExecutor.setQueueCapacity(CORE_POOL_SIZE << 2);
+        asyncTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         asyncTaskExecutor.initialize();
         return asyncTaskExecutor;
     }
 
     @Bean
-    public ThreadPoolTaskScheduler smsThradPoolTaskScheduler(){
+    public ThreadPoolTaskScheduler smsThreadPoolTaskScheduler(){
         ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
         threadPoolTaskScheduler.setPoolSize(SCHEDULER_POOL_SIZE);
         threadPoolTaskScheduler.setThreadNamePrefix("sms-schedule-");
         threadPoolTaskScheduler.initialize();
-        threadPoolTaskScheduler.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                SmsAutoConfiguration.cleanCache();
-            }
-        }, new CronTrigger("0 0/5 * * * ?"));
+        threadPoolTaskScheduler.schedule(SmsAutoConfiguration::cleanCache, new CronTrigger("0 0/5 * * * ?"));
         return threadPoolTaskScheduler;
     }
 
@@ -147,7 +144,7 @@ public class SmsAutoConfiguration {
         ObjectOutputStream oos = null;
         try {
             String property = System.getProperty("java.io.tmpdir");
-            String path = property + File.separator + SERIALAZE_FILE_NAME;
+            String path = property + File.separator + SERIALIZE_FILE_NAME;
             oos = new ObjectOutputStream(new FileOutputStream(new File(path)));
             oos.writeObject(CacheManager.getAllCache());
         } catch (IOException e) {
@@ -168,7 +165,7 @@ public class SmsAutoConfiguration {
         ObjectInputStream ois = null;
         try {
             String property = System.getProperty("java.io.tmpdir");
-            String path = property + File.separator + SERIALAZE_FILE_NAME;
+            String path = property + File.separator + SERIALIZE_FILE_NAME;
             ois = new ObjectInputStream(new FileInputStream(new File(path)));
             ConcurrentMap<String, Cache> cacheHashMap = (ConcurrentMap<String, Cache>)ois.readObject();
             CacheManager.putAll(cacheHashMap);
