@@ -10,7 +10,7 @@ public class BaseRequest implements Serializable {
     private static final long serialVersionUID = -3202828912350900963L;
     private String templateId;
 
-    private Limit limit;
+    private Limit limit = new Limit();
 
     public String getTemplateId() {
         return templateId;
