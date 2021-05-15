@@ -21,8 +21,8 @@
     <dependencies>
         <dependency>
             <groupId>com.github.jackieonway.sms</groupId>
-            <artifactId>sms-core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <artifactId>sms-commons</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

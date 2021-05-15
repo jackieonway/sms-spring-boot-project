@@ -1,9 +1,9 @@
 package com.example.demo.sms;
 
-import com.github.jackieonway.sms.entity.SmsProperties;
-import com.github.jackieonway.sms.entity.SubMailRequest;
-import com.github.jackieonway.sms.service.SmsService;
-import com.github.jackieonway.sms.service.SubMailSmsServiceImpl;
+import com.github.jackieonway.sms.core.entity.SmsProperties;
+import com.github.jackieonway.sms.core.entity.SubMailRequest;
+import com.github.jackieonway.sms.core.service.SmsService;
+import com.github.jackieonway.sms.core.service.SubMailSmsServiceImpl;
 import com.github.jackieonway.sms.submail.utils.SignTypeEnum;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class SubMailServiceImplTest {
         SubMailRequest params = new SubMailRequest();
         params.setContent("尊敬的客户，您正在进行下单，短信验证码是:4438。感谢您的使用，本条短信不用回复。");
         params.setPhoneNumber(phoneNumber);
-        params.setSignType(SignTypeEnum.SHA1);
+        params.setSignType(com.github.jackieonway.sms.submail.utils.SignTypeEnum.SHA1);
         Object o = service.sendSms(params);
         System.out.println(o);
     }

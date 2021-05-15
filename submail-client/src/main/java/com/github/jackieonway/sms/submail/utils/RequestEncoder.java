@@ -1,10 +1,10 @@
 package com.github.jackieonway.sms.submail.utils;
 
-import com.github.jackieonway.sms.core.exception.SmsException;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
+import com.github.jackieonway.sms.commons.exception.SmsException;
+import org.apache.commons.lang3.Validate;
+
+import javax.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -32,9 +32,8 @@ public class RequestEncoder {
      * @param str       需编码字符串
      * @return String 已编码
      */
-    @Nullable
-    public static String encode(@NonNull String algorithm, @Nullable String str) {
-        Assert.hasText(algorithm, "`algorithm` can not blank");
+    public static String encode(@NotNull String algorithm, @NotNull String str) {
+        Validate.notBlank(algorithm, "`algorithm` can not blank");
         if (str == null) {
             return null;
         }
@@ -43,7 +42,7 @@ public class RequestEncoder {
             messageDigest.update(str.getBytes(StandardCharsets.UTF_8));
             return getFormattedText(messageDigest.digest());
         } catch (Exception e) {
-            throw new SmsException(e.getMessage(),e);
+            throw new SmsException(e.getMessage(), e);
         }
 
     }
