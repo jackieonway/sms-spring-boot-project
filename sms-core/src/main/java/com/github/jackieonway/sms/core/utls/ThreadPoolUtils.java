@@ -37,6 +37,11 @@ public class ThreadPoolUtils {
 
     private static final String SERIALIZE_FILE_NAME = "serializeCache";
 
+    /**
+     * 异步线程池
+     *
+     * @return {@link AsyncTaskExecutor}
+     */
     public static AsyncTaskExecutor smsAsyncTaskExecutor() {
         ThreadPoolTaskExecutor asyncTaskExecutor = new ThreadPoolTaskExecutor();
         asyncTaskExecutor.setMaxPoolSize(MAX_POOL_SIZE);
@@ -48,6 +53,11 @@ public class ThreadPoolUtils {
         return asyncTaskExecutor;
     }
 
+    /**
+     * 周期线程池
+     *
+     * @return {@link ThreadPoolTaskScheduler}
+     */
     public static ThreadPoolTaskScheduler smsThreadPoolTaskScheduler() {
         ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
         threadPoolTaskScheduler.setPoolSize(SCHEDULER_POOL_SIZE);

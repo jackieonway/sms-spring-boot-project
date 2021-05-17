@@ -4,13 +4,13 @@
  */
 package com.github.jackieonway.sms.core.utls;
 
+import com.github.jackieonway.sms.commons.exception.SmsException;
 import com.github.jackieonway.sms.core.cache.CacheManager;
 import com.github.jackieonway.sms.core.entity.BaseRequest;
 import com.github.jackieonway.sms.core.entity.Limit;
 import com.github.jackieonway.sms.core.entity.SmsProperties;
 import com.github.jackieonway.sms.core.entity.cache.Cache;
 import com.github.jackieonway.sms.core.entity.cache.CacheBuilder;
-import com.github.jackieonway.sms.core.exception.SmsException;
 
 import java.util.Objects;
 

@@ -1,9 +1,9 @@
 package com.github.jackieonway.sms.core.service;
 
+import com.github.jackieonway.sms.commons.exception.SmsException;
 import com.github.jackieonway.sms.core.entity.BaseRequest;
 import com.github.jackieonway.sms.core.entity.SmsProperties;
 import com.github.jackieonway.sms.core.entity.UcpassSmsRequest;
-import com.github.jackieonway.sms.core.exception.SmsException;
 import com.github.jackieonway.sms.core.utls.SmsCacheUtils;
 import com.github.jackieonway.sms.ucpass.client.JsonReqClient;
 import com.github.jackieonway.sms.ucpass.entity.UcpassSmsProperties;
