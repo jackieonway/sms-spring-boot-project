@@ -1,20 +1,20 @@
 package com.github.jackieonway.sms.submail.client;
 
-import com.github.jackieonway.sms.core.exception.SmsException;
+import com.github.jackieonway.sms.commons.exception.SmsException;
+import com.github.jackieonway.sms.commons.utils.GsonUtils;
+import com.github.jackieonway.sms.commons.utils.OkHttpClientUtil;
 import com.github.jackieonway.sms.submail.model.MultiParams;
 import com.github.jackieonway.sms.submail.model.SubMailParams;
 import com.github.jackieonway.sms.submail.model.SubMailProperties;
-import com.github.jackieonway.sms.core.utils.GsonUtils;
-import com.github.jackieonway.sms.core.utils.OkHttpClientUtil;
 import com.github.jackieonway.sms.submail.utils.RequestEncoder;
 import com.github.jackieonway.sms.submail.utils.SignTypeEnum;
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +42,8 @@ public class SubMailClient {
 
     public SubMailClient(SubMailProperties properties) {
         this.properties = properties;
-        Assert.hasText(this.properties.getAppid(), "appid must not null");
-        Assert.hasText(this.properties.getAppKey(), "appKey must not null");
+        Validate.notBlank(this.properties.getAppid(), "appid must not null");
+        Validate.notBlank(this.properties.getAppKey(), "appKey must not null");
     }
 
     /**
@@ -54,12 +54,12 @@ public class SubMailClient {
      * @param params  subMail request other request params(其余参数)
      * @return result
      */
-    public String sendSms(@NonNull String to, @NonNull String content, SubMailParams params) {
+    public String sendSms(@NotNull String to, @NotNull String content, SubMailParams params) {
         if (params == null) {
             params = new SubMailParams();
         }
-        Assert.hasText(to, "`to` must not null");
-        Assert.hasText(content, "`content` must not null");
+        Validate.notBlank(to, "`to` must not null");
+        Validate.notBlank(content, "`content` must not null");
         Map<String, Object> maps = new HashMap<>();
         maps.put("to", to);
         maps.put("content", content);
@@ -75,16 +75,16 @@ public class SubMailClient {
      * @param params    其余参数
      * @return message result
      */
-    public String sendTemplateSms(@NonNull String to, @NonNull String projectId, String vars, SubMailParams params) {
+    public String sendTemplateSms(@NotNull String to, @NotNull String projectId, String vars, SubMailParams params) {
         if (params == null) {
             params = new SubMailParams();
         }
-        Assert.hasText(to, "`to` must not blank");
-        Assert.hasText(projectId, "`project` must not blank");
+        Validate.notBlank(to, "`to` must not blank");
+        Validate.notBlank(projectId, "`project` must not blank");
         Map<String, Object> maps = new HashMap<>();
         maps.put("to", to);
         maps.put("project", projectId);
-        if (StringUtils.hasText(vars)) {
+        if (StringUtils.isNotBlank(vars)) {
             maps.put("vars", vars);
         }
         return send(MESSAGE_TEMPLATE_SEND_URL, params, maps);
@@ -98,12 +98,12 @@ public class SubMailClient {
      * @param params  请求参数
      * @return result message
      */
-    public String sendBatchSms(@NonNull String content, @NonNull List<MultiParams> multi, SubMailParams params) {
+    public String sendBatchSms(@NotNull String content, @NotNull List<MultiParams> multi, SubMailParams params) {
         if (params == null) {
             params = new SubMailParams();
         }
-        Assert.hasText(content, "`content` must not blank");
-        Assert.notEmpty(multi, "multi must not empty");
+        Validate.notBlank(content, "`content` must not blank");
+        Validate.notEmpty(multi, "multi must not empty");
         Map<String, Object> maps = new HashMap<>();
         maps.put("content", content);
         maps.put("multi", GsonUtils.gson2String(multi));
@@ -118,12 +118,12 @@ public class SubMailClient {
      * @param params    请求参数
      * @return result message
      */
-    public String sendBatchTemplateSms(@NonNull String projectId, List<MultiParams> multi, SubMailParams params) {
+    public String sendBatchTemplateSms(@NotNull String projectId, List<MultiParams> multi, SubMailParams params) {
         if (params == null) {
             params = new SubMailParams();
         }
-        Assert.hasText(projectId, "`projectId` must not blank");
-        Assert.notEmpty(multi, "`multi` must not empty");
+        Validate.notBlank(projectId, "`projectId` must not blank");
+        Validate.notEmpty(multi, "`multi` must not empty");
         Map<String, Object> maps = new HashMap<>();
         maps.put("project", projectId);
         maps.put("multi", GsonUtils.gson2String(multi));
@@ -149,13 +149,13 @@ public class SubMailClient {
         data.put(SIGN_TYPE, params.getSignType());
         String signature = createSignature(RequestEncoder.formatRequest(data), params.getSignType());
         data.put(SIGNATURE, signature);
-        if (StringUtils.hasText(params.getTag())) {
+        if (StringUtils.isNotBlank(params.getTag())) {
             data.put(TAG, params.getTag());
         }
         return data;
     }
 
-    protected String createSignature(String data, @NonNull String sinType) {
+    protected String createSignature(String data, @NotNull String sinType) {
         if (SignTypeEnum.NORMAL.getValue().equals(sinType)) {
             return this.properties.getAppKey();
         } else {
@@ -163,8 +163,8 @@ public class SubMailClient {
         }
     }
 
-    private String buildSignature(String data, @NonNull String signType) {
-        Assert.hasText(signType, "sign type can not be blank");
+    private String buildSignature(String data, @NotNull String signType) {
+        Validate.notBlank(signType, "sign type can not be blank");
         String app = this.properties.getAppid();
         String appKey = this.properties.getAppKey();
         // order is confirmed
