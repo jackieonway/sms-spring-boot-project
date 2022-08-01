@@ -33,7 +33,7 @@ public class SmsCacheUtils {
      * @since 0.0.3
      */
     public static int getTimeout(Limit limit) {
-        return limit.getLimitTime();
+        return null == limit ? 60000 : limit.getLimitTime();
     }
 
     /**
@@ -46,7 +46,7 @@ public class SmsCacheUtils {
      * @since 0.0.3
      */
     public static boolean enableCache(Limit limit) {
-        return limit.isEnable();
+        return null != limit && limit.isEnable();
     }
 
     /**
